@@ -1,8 +1,6 @@
  这是软件项目管理第六组的远程库。
- ##前端
+## 前端 ##
  web开发，前端使用框架 bootstrap-3.3.7-dist 版本，压缩包可在web_some_resource中找到.
- 1. **图标**使用http://www.bootcss.com/p/font-awesome/
- 
-##后端
+ 1. ** 图标 **使用 http://www.bootcss.com/p/font-awesome/
+## 后端 ##
  框架已经上传，请各位着手进行开发，框架有问题向后端组长反馈，由其修改，其他人不能直接修改框架。
-
