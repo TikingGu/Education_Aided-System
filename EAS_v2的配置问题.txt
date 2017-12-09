@@ -1,0 +1,5 @@
+1.下载后，打开hiberbate.cfg.xml
+   更换自己的DB Driver
+   改自己mySQL相应的Username 和  password
+2.打开jdbc.properties 里面的相应参数修改同1
+3.修改后可以完成运行，仍有问题Q我（后端组长）
