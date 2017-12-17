@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-12-17 17:25:20
+Date: 2017-12-17 18:44:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -175,7 +175,6 @@ CREATE TABLE `test` (
   `TotalPoints` float NOT NULL COMMENT '测验总分',
   `Test_Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '测验日期',
   PRIMARY KEY (`Test_ID`,`Class_ID`),
-  KEY `Test_ID` (`Test_ID`),
   KEY `test_cid` (`Class_ID`),
   CONSTRAINT `test_cid` FOREIGN KEY (`Class_ID`) REFERENCES `class` (`Class_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
