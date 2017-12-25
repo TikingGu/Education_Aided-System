@@ -10,16 +10,16 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-12-17 20:39:28
+Date: 2017-12-17 17:25:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for classinfo
+-- Table structure for class
 -- ----------------------------
-DROP TABLE IF EXISTS `classinfo`;
-CREATE TABLE `classinfo` (
+DROP TABLE IF EXISTS `class`;
+CREATE TABLE `class` (
   `Class_ID` varchar(30) NOT NULL COMMENT '课程班级',
   `CourseID` varchar(30) NOT NULL COMMENT '课程号',
   `StudentNumber` int(11) DEFAULT NULL COMMENT '学生人数',
@@ -119,7 +119,7 @@ CREATE TABLE `sign` (
   `Sign_Date` datetime NOT NULL COMMENT '签到日期',
   PRIMARY KEY (`sid`,`classid`,`Sign_Date`),
   KEY `class_id` (`classid`),
-  CONSTRAINT `class_id` FOREIGN KEY (`classid`) REFERENCES `classinfo` (`Class_ID`),
+  CONSTRAINT `class_id` FOREIGN KEY (`classid`) REFERENCES `class` (`Class_ID`),
   CONSTRAINT `s_id` FOREIGN KEY (`sid`) REFERENCES `student` (`S_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -161,7 +161,7 @@ CREATE TABLE `teachingevaluation` (
   PRIMARY KEY (`e_ID`,`e_Class`,`sid`),
   KEY `e_class` (`e_Class`),
   KEY `e_s` (`sid`),
-  CONSTRAINT `e_class` FOREIGN KEY (`e_Class`) REFERENCES `classinfo` (`Class_ID`),
+  CONSTRAINT `e_class` FOREIGN KEY (`e_Class`) REFERENCES `class` (`Class_ID`),
   CONSTRAINT `e_s` FOREIGN KEY (`sid`) REFERENCES `student` (`S_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -174,9 +174,10 @@ CREATE TABLE `test` (
   `Class_ID` varchar(30) NOT NULL COMMENT '班级ID',
   `TotalPoints` float NOT NULL COMMENT '测验总分',
   `Test_Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '测验日期',
-  PRIMARY KEY (`Test_ID`),
+  PRIMARY KEY (`Test_ID`,`Class_ID`),
+  KEY `Test_ID` (`Test_ID`),
   KEY `test_cid` (`Class_ID`),
-  CONSTRAINT `test_cid` FOREIGN KEY (`Class_ID`) REFERENCES `classinfo` (`Class_ID`)
+  CONSTRAINT `test_cid` FOREIGN KEY (`Class_ID`) REFERENCES `class` (`Class_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
