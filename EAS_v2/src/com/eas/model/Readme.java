@@ -1,4 +1,4 @@
-package com.eas.model.courseware_uploadanddownload_system;
+package com.eas.model;
 
 public class Readme {
 
