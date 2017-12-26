@@ -10,10 +10,24 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-12-17 20:39:28
+Date: 2017-12-27 00:00:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for announcement
+-- ----------------------------
+DROP TABLE IF EXISTS `announcement`;
+CREATE TABLE `announcement` (
+  `An_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '公告ID',
+  `Title` varchar(50) NOT NULL COMMENT '标题',
+  `Content` varchar(300) DEFAULT NULL COMMENT '内容',
+  `classid` varchar(30) NOT NULL COMMENT '班级ID',
+  PRIMARY KEY (`An_ID`),
+  KEY `an_classid` (`classid`),
+  CONSTRAINT `an_classid` FOREIGN KEY (`classid`) REFERENCES `classinfo` (`Class_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for classinfo
@@ -32,6 +46,20 @@ CREATE TABLE `classinfo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Table structure for comment
+-- ----------------------------
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE `comment` (
+  `Comment_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '批语ID',
+  `Title` varchar(50) DEFAULT NULL COMMENT '标题',
+  `Content` varchar(300) DEFAULT NULL COMMENT '内容',
+  `sid` varchar(30) NOT NULL COMMENT '学生ID',
+  PRIMARY KEY (`Comment_ID`),
+  KEY `co_sid` (`sid`),
+  CONSTRAINT `co_sid` FOREIGN KEY (`sid`) REFERENCES `student` (`S_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
 -- Table structure for course
 -- ----------------------------
 DROP TABLE IF EXISTS `course`;
@@ -47,13 +75,14 @@ CREATE TABLE `course` (
 -- ----------------------------
 DROP TABLE IF EXISTS `posting`;
 CREATE TABLE `posting` (
-  `Po_ID` varchar(30) NOT NULL COMMENT '主贴ID',
-  `Po_Date` datetime NOT NULL COMMENT '主贴发布日期',
+  `Po_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '主贴ID',
+  `Po_Date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '主贴发布日期',
   `Replies_Num` int(11) DEFAULT '0' COMMENT '帖子回复数',
   `Agree_Num` int(11) DEFAULT '0' COMMENT '赞同数',
   `Disagree_Num` int(11) DEFAULT '0' COMMENT '反对数',
   `Po_Student` varchar(30) NOT NULL COMMENT '发帖学生ID',
   `Content` varchar(500) NOT NULL COMMENT '内容',
+  `Title` varchar(50) NOT NULL COMMENT '标题',
   PRIMARY KEY (`Po_ID`),
   KEY `po_sid` (`Po_Student`),
   CONSTRAINT `po_sid` FOREIGN KEY (`Po_Student`) REFERENCES `student` (`S_ID`)
@@ -64,7 +93,7 @@ CREATE TABLE `posting` (
 -- ----------------------------
 DROP TABLE IF EXISTS `question`;
 CREATE TABLE `question` (
-  `QuestionID` varchar(30) NOT NULL COMMENT '题目ID',
+  `QuestionID` int(11) NOT NULL AUTO_INCREMENT COMMENT '题目ID',
   `QuestionTitle` varchar(100) NOT NULL COMMENT '题目',
   `Answer` varchar(1) NOT NULL COMMENT '答案',
   `Option1` varchar(30) DEFAULT NULL COMMENT '选项1',
@@ -73,7 +102,7 @@ CREATE TABLE `question` (
   `Option4` varchar(30) DEFAULT NULL COMMENT '选项4',
   `Point` float NOT NULL COMMENT '分值',
   `testid` int(11) NOT NULL COMMENT '测验ID',
-  PRIMARY KEY (`QuestionID`,`testid`),
+  PRIMARY KEY (`QuestionID`),
   KEY `test__id` (`testid`),
   CONSTRAINT `test__id` FOREIGN KEY (`testid`) REFERENCES `test` (`Test_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -83,12 +112,12 @@ CREATE TABLE `question` (
 -- ----------------------------
 DROP TABLE IF EXISTS `replies`;
 CREATE TABLE `replies` (
-  `Replies_ID` varchar(30) NOT NULL COMMENT '回帖ID',
-  `PoID` varchar(30) NOT NULL COMMENT '主贴ID',
-  `Re_Date` datetime NOT NULL COMMENT '回帖日期',
+  `Replies_ID` int(30) NOT NULL AUTO_INCREMENT COMMENT '回帖ID',
+  `PoID` int(11) NOT NULL COMMENT '主贴ID',
+  `Re_Date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '回帖日期',
   `Re_Student` varchar(30) NOT NULL COMMENT '回帖学生ID',
   `Content` varchar(200) NOT NULL COMMENT '内容',
-  PRIMARY KEY (`Replies_ID`,`PoID`),
+  PRIMARY KEY (`Replies_ID`),
   KEY `poid` (`PoID`),
   CONSTRAINT `poid` FOREIGN KEY (`PoID`) REFERENCES `posting` (`Po_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -98,12 +127,12 @@ CREATE TABLE `replies` (
 -- ----------------------------
 DROP TABLE IF EXISTS `sheet`;
 CREATE TABLE `sheet` (
-  `SheetID` varchar(30) NOT NULL COMMENT '答卷ID',
+  `SheetID` int(11) NOT NULL AUTO_INCREMENT COMMENT '答卷ID',
   `Sid` varchar(30) DEFAULT NULL COMMENT '学生ID',
   `Student_Answers` varchar(30) DEFAULT NULL COMMENT '学生答案',
   `Score` float DEFAULT NULL COMMENT '得分',
   `testid` int(11) NOT NULL COMMENT '测验ID',
-  PRIMARY KEY (`SheetID`,`testid`),
+  PRIMARY KEY (`SheetID`),
   KEY `test_id` (`testid`),
   CONSTRAINT `test_id` FOREIGN KEY (`testid`) REFERENCES `test` (`Test_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -158,7 +187,7 @@ CREATE TABLE `teachingevaluation` (
   `A3` varchar(1) DEFAULT NULL COMMENT '评教结果3',
   `A4` varchar(1) DEFAULT NULL COMMENT '评教结果4',
   `A5` varchar(1) DEFAULT NULL COMMENT '评教结果5',
-  PRIMARY KEY (`e_ID`,`e_Class`,`sid`),
+  PRIMARY KEY (`e_ID`),
   KEY `e_class` (`e_Class`),
   KEY `e_s` (`sid`),
   CONSTRAINT `e_class` FOREIGN KEY (`e_Class`) REFERENCES `classinfo` (`Class_ID`),
@@ -180,15 +209,26 @@ CREATE TABLE `test` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for uploadflie
+-- Table structure for uploadfile
 -- ----------------------------
-DROP TABLE IF EXISTS `uploadflie`;
-CREATE TABLE `uploadflie` (
+DROP TABLE IF EXISTS `uploadfile`;
+CREATE TABLE `uploadfile` (
   `FileName` varchar(50) NOT NULL COMMENT '文件名',
   `UploadTeacher` varchar(30) NOT NULL COMMENT '上传老师ID',
   `FileSize` int(11) DEFAULT NULL COMMENT '文件大小',
   `UploadDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '上传时间',
-  PRIMARY KEY (`FileName`,`UploadTeacher`),
+  PRIMARY KEY (`FileName`),
   KEY `U_tid` (`UploadTeacher`),
   CONSTRAINT `U_tid` FOREIGN KEY (`UploadTeacher`) REFERENCES `teacher` (`T_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for vote
+-- ----------------------------
+DROP TABLE IF EXISTS `vote`;
+CREATE TABLE `vote` (
+  `Vote_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '投票ID',
+  `AgreeNum` int(11) DEFAULT NULL COMMENT '赞同数',
+  `DisagreeNum` int(11) DEFAULT NULL COMMENT '反对数',
+  PRIMARY KEY (`Vote_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
