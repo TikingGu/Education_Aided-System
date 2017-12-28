@@ -15,5 +15,7 @@
         <action name="test" class="testAction">
             <result name="success">/test.jsp</result>
         </action>
+       
     </package>
+
 </struts>
