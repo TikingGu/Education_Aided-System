@@ -1,11 +1,11 @@
-package com.eas.model;
+package com.eas.newmodel;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -14,12 +14,12 @@ import javax.persistence.Table;
  * Question entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "question", catalog = "eas24")
+@Table(name = "question", catalog = "eas30")
 public class Question implements java.io.Serializable {
 
 	// Fields
 
-	private QuestionId id;
+	private Integer questionId;
 	private Test test;
 	private String questionTitle;
 	private String answer;
@@ -27,7 +27,7 @@ public class Question implements java.io.Serializable {
 	private String option2;
 	private String option3;
 	private String option4;
-	private Float point;
+	private float point;
 
 	// Constructors
 
@@ -36,9 +36,7 @@ public class Question implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Question(QuestionId id, Test test, String questionTitle,
-			String answer, Float point) {
-		this.id = id;
+	public Question(Test test, String questionTitle, String answer, float point) {
 		this.test = test;
 		this.questionTitle = questionTitle;
 		this.answer = answer;
@@ -46,10 +44,9 @@ public class Question implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Question(QuestionId id, Test test, String questionTitle,
-			String answer, String option1, String option2, String option3,
-			String option4, Float point) {
-		this.id = id;
+	public Question(Test test, String questionTitle, String answer,
+			String option1, String option2, String option3, String option4,
+			float point) {
 		this.test = test;
 		this.questionTitle = questionTitle;
 		this.answer = answer;
@@ -61,20 +58,19 @@ public class Question implements java.io.Serializable {
 	}
 
 	// Property accessors
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "questionId", column = @Column(name = "QuestionID", nullable = false, length = 30)),
-			@AttributeOverride(name = "testid", column = @Column(name = "testid", nullable = false)) })
-	public QuestionId getId() {
-		return this.id;
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "QuestionID", unique = true, nullable = false)
+	public Integer getQuestionId() {
+		return this.questionId;
 	}
 
-	public void setId(QuestionId id) {
-		this.id = id;
+	public void setQuestionId(Integer questionId) {
+		this.questionId = questionId;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "testid", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "testid", nullable = false)
 	public Test getTest() {
 		return this.test;
 	}
@@ -138,11 +134,11 @@ public class Question implements java.io.Serializable {
 	}
 
 	@Column(name = "Point", nullable = false, precision = 12, scale = 0)
-	public Float getPoint() {
+	public float getPoint() {
 		return this.point;
 	}
 
-	public void setPoint(Float point) {
+	public void setPoint(float point) {
 		this.point = point;
 	}
 

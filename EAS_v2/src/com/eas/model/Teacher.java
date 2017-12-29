@@ -1,4 +1,4 @@
-package com.eas.model;
+package com.eas.newmodel;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -6,6 +6,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -14,7 +16,7 @@ import javax.persistence.Table;
  * Teacher entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "teacher", catalog = "eas24")
+@Table(name = "teacher", catalog = "eas30")
 public class Teacher implements java.io.Serializable {
 
 	// Fields
@@ -22,7 +24,7 @@ public class Teacher implements java.io.Serializable {
 	private String TId;
 	private String tname;
 	private String tpassword;
-	private Set<Uploadflie> uploadflies = new HashSet<Uploadflie>(0);
+	private Set<Uploadfile> uploadfiles = new HashSet<Uploadfile>(0);
 	private Set<Classinfo> classinfos = new HashSet<Classinfo>(0);
 
 	// Constructors
@@ -32,24 +34,23 @@ public class Teacher implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Teacher(String TId, String tname, String tpassword) {
-		this.TId = TId;
+	public Teacher(String tname, String tpassword) {
 		this.tname = tname;
 		this.tpassword = tpassword;
 	}
 
 	/** full constructor */
-	public Teacher(String TId, String tname, String tpassword,
-			Set<Uploadflie> uploadflies, Set<Classinfo> classinfos) {
-		this.TId = TId;
+	public Teacher(String tname, String tpassword, Set<Uploadfile> uploadfiles,
+			Set<Classinfo> classinfos) {
 		this.tname = tname;
 		this.tpassword = tpassword;
-		this.uploadflies = uploadflies;
+		this.uploadfiles = uploadfiles;
 		this.classinfos = classinfos;
 	}
 
 	// Property accessors
 	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "T_ID", unique = true, nullable = false, length = 30)
 	public String getTId() {
 		return this.TId;
@@ -78,12 +79,12 @@ public class Teacher implements java.io.Serializable {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "teacher")
-	public Set<Uploadflie> getUploadflies() {
-		return this.uploadflies;
+	public Set<Uploadfile> getUploadfiles() {
+		return this.uploadfiles;
 	}
 
-	public void setUploadflies(Set<Uploadflie> uploadflies) {
-		this.uploadflies = uploadflies;
+	public void setUploadfiles(Set<Uploadfile> uploadfiles) {
+		this.uploadfiles = uploadfiles;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "teacher")

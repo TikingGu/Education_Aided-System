@@ -1,11 +1,11 @@
-package com.eas.model;
+package com.eas.newmodel;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -14,16 +14,16 @@ import javax.persistence.Table;
  * Sheet entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "sheet", catalog = "eas24")
+@Table(name = "sheet", catalog = "eas30")
 public class Sheet implements java.io.Serializable {
 
 	// Fields
 
-	private SheetId id;
+	private Integer sheetId;
 	private Test test;
 	private String sid;
 	private String studentAnswers;
-	private Float score;
+	private float score;
 
 	// Constructors
 
@@ -32,15 +32,12 @@ public class Sheet implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Sheet(SheetId id, Test test) {
-		this.id = id;
+	public Sheet(Test test) {
 		this.test = test;
 	}
 
 	/** full constructor */
-	public Sheet(SheetId id, Test test, String sid, String studentAnswers,
-			Float score) {
-		this.id = id;
+	public Sheet(Test test, String sid, String studentAnswers, float score) {
 		this.test = test;
 		this.sid = sid;
 		this.studentAnswers = studentAnswers;
@@ -48,20 +45,19 @@ public class Sheet implements java.io.Serializable {
 	}
 
 	// Property accessors
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "sheetId", column = @Column(name = "SheetID", nullable = false, length = 30)),
-			@AttributeOverride(name = "testid", column = @Column(name = "testid", nullable = false)) })
-	public SheetId getId() {
-		return this.id;
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "SheetID", unique = true, nullable = false)
+	public Integer getSheetId() {
+		return this.sheetId;
 	}
 
-	public void setId(SheetId id) {
-		this.id = id;
+	public void setSheetId(Integer sheetId) {
+		this.sheetId = sheetId;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "testid", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "testid", nullable = false)
 	public Test getTest() {
 		return this.test;
 	}
@@ -89,11 +85,11 @@ public class Sheet implements java.io.Serializable {
 	}
 
 	@Column(name = "Score", precision = 12, scale = 0)
-	public Float getScore() {
+	public float getScore() {
 		return this.score;
 	}
 
-	public void setScore(Float score) {
+	public void setScore(float score) {
 		this.score = score;
 	}
 

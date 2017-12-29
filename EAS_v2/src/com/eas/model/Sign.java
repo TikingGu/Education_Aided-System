@@ -1,4 +1,4 @@
-package com.eas.model;
+package com.eas.newmodel;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * Sign entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "sign", catalog = "eas24")
+@Table(name = "sign", catalog = "eas30")
 public class Sign implements java.io.Serializable {
 
 	// Fields

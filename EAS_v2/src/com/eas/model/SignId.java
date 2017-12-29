@@ -1,6 +1,6 @@
-package com.eas.model;
+package com.eas.newmodel;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -14,7 +14,7 @@ public class SignId implements java.io.Serializable {
 
 	private String sid;
 	private String classid;
-	private Timestamp signDate;
+	private Date signDate;
 
 	// Constructors
 
@@ -23,7 +23,7 @@ public class SignId implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public SignId(String sid, String classid, Timestamp signDate) {
+	public SignId(String sid, String classid, Date signDate) {
 		this.sid = sid;
 		this.classid = classid;
 		this.signDate = signDate;
@@ -50,11 +50,11 @@ public class SignId implements java.io.Serializable {
 	}
 
 	@Column(name = "Sign_Date", nullable = false, length = 19)
-	public Timestamp getSignDate() {
+	public Date getSignDate() {
 		return this.signDate;
 	}
 
-	public void setSignDate(Timestamp signDate) {
+	public void setSignDate(Date signDate) {
 		this.signDate = signDate;
 	}
 

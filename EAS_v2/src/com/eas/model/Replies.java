@@ -1,12 +1,12 @@
-package com.eas.model;
+package com.eas.newmodel;
 
-import java.sql.Timestamp;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
+import java.util.Date;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -15,14 +15,14 @@ import javax.persistence.Table;
  * Replies entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "replies", catalog = "eas24")
+@Table(name = "replies", catalog = "eas30")
 public class Replies implements java.io.Serializable {
 
 	// Fields
 
-	private RepliesId id;
+	private Integer repliesId;
 	private Posting posting;
-	private Timestamp reDate;
+	private Date reDate;
 	private String reStudent;
 	private String content;
 
@@ -33,9 +33,8 @@ public class Replies implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Replies(RepliesId id, Posting posting, Timestamp reDate,
-			String reStudent, String content) {
-		this.id = id;
+	public Replies(Posting posting, Date reDate, String reStudent,
+			String content) {
 		this.posting = posting;
 		this.reDate = reDate;
 		this.reStudent = reStudent;
@@ -43,20 +42,19 @@ public class Replies implements java.io.Serializable {
 	}
 
 	// Property accessors
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "repliesId", column = @Column(name = "Replies_ID", nullable = false, length = 30)),
-			@AttributeOverride(name = "poId", column = @Column(name = "PoID", nullable = false, length = 30)) })
-	public RepliesId getId() {
-		return this.id;
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "Replies_ID", unique = true, nullable = false)
+	public Integer getRepliesId() {
+		return this.repliesId;
 	}
 
-	public void setId(RepliesId id) {
-		this.id = id;
+	public void setRepliesId(Integer repliesId) {
+		this.repliesId = repliesId;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PoID", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "PoID", nullable = false)
 	public Posting getPosting() {
 		return this.posting;
 	}
@@ -66,11 +64,11 @@ public class Replies implements java.io.Serializable {
 	}
 
 	@Column(name = "Re_Date", nullable = false, length = 19)
-	public Timestamp getReDate() {
+	public Date getReDate() {
 		return this.reDate;
 	}
 
-	public void setReDate(Timestamp reDate) {
+	public void setReDate(Date reDate) {
 		this.reDate = reDate;
 	}
 

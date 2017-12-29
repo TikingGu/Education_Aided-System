@@ -1,4 +1,4 @@
-package com.eas.model;
+package com.eas.newmodel;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -6,6 +6,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -14,7 +16,7 @@ import javax.persistence.Table;
  * Course entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "course", catalog = "eas24")
+@Table(name = "course", catalog = "eas30")
 public class Course implements java.io.Serializable {
 
 	// Fields
@@ -31,16 +33,13 @@ public class Course implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Course(String courseId, String courseName, Integer period) {
-		this.courseId = courseId;
+	public Course(String courseName, Integer period) {
 		this.courseName = courseName;
 		this.period = period;
 	}
 
 	/** full constructor */
-	public Course(String courseId, String courseName, Integer period,
-			Set<Classinfo> classinfos) {
-		this.courseId = courseId;
+	public Course(String courseName, Integer period, Set<Classinfo> classinfos) {
 		this.courseName = courseName;
 		this.period = period;
 		this.classinfos = classinfos;
@@ -48,6 +47,7 @@ public class Course implements java.io.Serializable {
 
 	// Property accessors
 	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "Course_ID", unique = true, nullable = false, length = 30)
 	public String getCourseId() {
 		return this.courseId;
