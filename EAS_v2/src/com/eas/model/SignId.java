@@ -1,4 +1,4 @@
-package com.eas.newmodel;
+package com.eas.model;
 
 import java.util.Date;
 import javax.persistence.Column;

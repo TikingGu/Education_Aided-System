@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC
-	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
-	"http://struts.apache.org/dtds/struts-2.0.dtd">
-	
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
 <struts>
     <!-- 配置为开发模式，一旦文件改动，不需要重启，会立即生效 -->
     <constant name="struts.devMode" value="true" />
@@ -10,9 +10,7 @@
     <constant name="struts.action.extension" value="action" />
     <!-- 把主题配置为simple -->
     <constant name="struts.ui.theme" value="simple" />
-    
    <package name="default" namespace="/" extends="struts-default">
-<<<<<<< HEAD
     <!-- 配置测试用的action当与spring整合,class=bean的名称（如果bean没有指定value，则首写字母要小写））  -->
         <action name="test" class="testAction">
             <result name="success">/test.jsp</result>
@@ -20,12 +18,4 @@
        
     </package>
 
-=======
-    <!-- 配置测试用的action当与spring整合,class=bean的名称（如果bean没有指定value，则首写字母要小写）） 
-          <action name="TeachEvaluation" class="com.eas.action.teach_valuation_system.TeachEvaluationAction" >
-            <result name="success">/TeachEvaluationSuccess.jsp </result>
-          </action>-->
-    </package> 
-    
->>>>>>> 2c9d206b57cf59477503aa8d308b6154bca30aaf
 </struts>
