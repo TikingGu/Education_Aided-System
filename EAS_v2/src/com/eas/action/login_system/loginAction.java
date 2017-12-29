@@ -17,14 +17,11 @@ import com.opensymphony.xwork2.ActionSupport;
 @Namespace("/")
 @ParentPackage("struts-default")
 public class loginAction extends ActionSupport {
-       /**
-	 * 
-	 */
 	private static final long serialVersionUID = 8787453853743288026L;
 	private String id;
-       private String Password;
-       private String msg;
-       public String getId() {
+    private String Password;
+
+    public String getId() {
 		return id;
 	}
 	public void setId(String id) {
@@ -36,39 +33,22 @@ public class loginAction extends ActionSupport {
 	public void setPassword(String password) {
 		Password = password;
 	}
-	public String getMsg(){
-		return msg;
-	}
-	public void setMsg(String s){
-		this.msg=s;
-	}
 	@Resource(name="UserServiceI")
     private UserServiceI userServiceI;
-       @Action(value="loginaction",results={
-	    		@Result(name="success",location="/TeachEvaluation.jsp"),
-	    		@Result(name="error",location="/index.jsp")
-	    })
+       @Action(value="loginaction")
        public String execute(){
-    	   char c= getId().charAt(0);
-    	   String p = String.valueOf(c);
-          ActionContext.getContext().getSession().put("id ", id);
-    	  ActionContext.getContext().getSession().put("Password ", Password);
-    	   if(p.equals("t")){
-    		   if(userServiceI.Tlogin(id, Password)==true){
-    		   return SUCCESS;}
-    		   else{
-    			 msg="账户错误，请重试！";
-    			 return ERROR;
-    		   }
-    	   }
-    	   if(p.equals("s")){
-    		    if(userServiceI.Slogin(id, Password)==true){
-    		    return SUCCESS;}
-    		   else{
-    			   msg="账户错误，请重试！";  
-    			   return ERROR;
-    		   }
-    	   }
-    	   return ERROR;
+			int login=-1;
+			char c= getId().charAt(0);
+			String p = String.valueOf(c);
+			ActionContext.getContext().getSession().put("id ", id);
+			if(p.equals("t")){
+    		   login=userServiceI.Tlogin(id, Password);
+    		   
+			}
+			if(p.equals("s")){
+    		   login=userServiceI.Slogin(id, Password);
+    		   
+			}
+			return null;
        }
 }
