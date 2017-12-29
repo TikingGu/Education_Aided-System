@@ -143,7 +143,7 @@ public class HibernateDAO {
 			transaction.commit();
 			destory();
 			}
-		return false;
+		return -1;
 		}			
 	public int Slogin(String id,String pw){
 		
@@ -152,7 +152,7 @@ public class HibernateDAO {
 		String hql="from Student as s Where s.SId=?";
 		List<Student> n=session.createQuery(hql).setParameter(0, id).list();
 		if(!n.isEmpty())
-			if(n.get(0).getStuPassword.equals(pw)){
+			if(n.get(0).getStuPassword().equals(pw)){
 				return 1;
 			}else{
 				return -2;
@@ -166,7 +166,7 @@ public class HibernateDAO {
 		finally{
 			transaction.commit();
 			destory();
-			}			
-		return false;		
+			}
+		return -1;
 		}
 }

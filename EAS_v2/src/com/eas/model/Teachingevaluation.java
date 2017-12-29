@@ -1,4 +1,4 @@
-package com.eas.newmodel;
+package com.eas.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
