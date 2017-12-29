@@ -1,11 +1,11 @@
-package com.eas.model;
+package com.eas.newmodel;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -14,12 +14,12 @@ import javax.persistence.Table;
  * Teachingevaluation entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "teachingevaluation", catalog = "eas24")
+@Table(name = "teachingevaluation", catalog = "eas30")
 public class Teachingevaluation implements java.io.Serializable {
 
 	// Fields
 
-	private TeachingevaluationId id;
+	private String EId;
 	private Classinfo classinfo;
 	private Student student;
 	private String a1;
@@ -35,18 +35,14 @@ public class Teachingevaluation implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Teachingevaluation(TeachingevaluationId id, Classinfo classinfo,
-			Student student) {
-		this.id = id;
+	public Teachingevaluation(Classinfo classinfo, Student student) {
 		this.classinfo = classinfo;
 		this.student = student;
 	}
 
 	/** full constructor */
-	public Teachingevaluation(TeachingevaluationId id, Classinfo classinfo,
-			Student student, String a1, String a2, String a3, String a4,
-			String a5) {
-		this.id = id;
+	public Teachingevaluation(Classinfo classinfo, Student student, String a1,
+			String a2, String a3, String a4, String a5) {
 		this.classinfo = classinfo;
 		this.student = student;
 		this.a1 = a1;
@@ -57,21 +53,19 @@ public class Teachingevaluation implements java.io.Serializable {
 	}
 
 	// Property accessors
-	@EmbeddedId
-	@AttributeOverrides({
-			@AttributeOverride(name = "EId", column = @Column(name = "e_ID", nullable = false, length = 30)),
-			@AttributeOverride(name = "EClass", column = @Column(name = "e_Class", nullable = false, length = 30)),
-			@AttributeOverride(name = "sid", column = @Column(name = "sid", nullable = false, length = 30)) })
-	public TeachingevaluationId getId() {
-		return this.id;
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "e_ID", unique = true, nullable = false, length = 30)
+	public String getEId() {
+		return this.EId;
 	}
 
-	public void setId(TeachingevaluationId id) {
-		this.id = id;
+	public void setEId(String EId) {
+		this.EId = EId;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "e_Class", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "e_Class", nullable = false)
 	public Classinfo getClassinfo() {
 		return this.classinfo;
 	}
@@ -81,7 +75,7 @@ public class Teachingevaluation implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "sid", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "sid", nullable = false)
 	public Student getStudent() {
 		return this.student;
 	}

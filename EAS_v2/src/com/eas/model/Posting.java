@@ -1,12 +1,14 @@
-package com.eas.model;
+package com.eas.newmodel;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,18 +19,19 @@ import javax.persistence.Table;
  * Posting entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "posting", catalog = "eas24")
+@Table(name = "posting", catalog = "eas30")
 public class Posting implements java.io.Serializable {
 
 	// Fields
 
-	private String poId;
+	private Integer poId;
 	private Student student;
-	private Timestamp poDate;
+	private Date poDate;
 	private Integer repliesNum;
 	private Integer agreeNum;
 	private Integer disagreeNum;
 	private String content;
+	private String title;
 	private Set<Replies> replieses = new HashSet<Replies>(0);
 
 	// Constructors
@@ -38,36 +41,36 @@ public class Posting implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Posting(String poId, Student student, Timestamp poDate,
-			String content) {
-		this.poId = poId;
+	public Posting(Student student, Date poDate, String content, String title) {
 		this.student = student;
 		this.poDate = poDate;
 		this.content = content;
+		this.title = title;
 	}
 
 	/** full constructor */
-	public Posting(String poId, Student student, Timestamp poDate,
-			Integer repliesNum, Integer agreeNum, Integer disagreeNum,
-			String content, Set<Replies> replieses) {
-		this.poId = poId;
+	public Posting(Student student, Date poDate, Integer repliesNum,
+			Integer agreeNum, Integer disagreeNum, String content,
+			String title, Set<Replies> replieses) {
 		this.student = student;
 		this.poDate = poDate;
 		this.repliesNum = repliesNum;
 		this.agreeNum = agreeNum;
 		this.disagreeNum = disagreeNum;
 		this.content = content;
+		this.title = title;
 		this.replieses = replieses;
 	}
 
 	// Property accessors
 	@Id
-	@Column(name = "Po_ID", unique = true, nullable = false, length = 30)
-	public String getPoId() {
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "Po_ID", unique = true, nullable = false)
+	public Integer getPoId() {
 		return this.poId;
 	}
 
-	public void setPoId(String poId) {
+	public void setPoId(Integer poId) {
 		this.poId = poId;
 	}
 
@@ -82,11 +85,11 @@ public class Posting implements java.io.Serializable {
 	}
 
 	@Column(name = "Po_Date", nullable = false, length = 19)
-	public Timestamp getPoDate() {
+	public Date getPoDate() {
 		return this.poDate;
 	}
 
-	public void setPoDate(Timestamp poDate) {
+	public void setPoDate(Date poDate) {
 		this.poDate = poDate;
 	}
 
@@ -124,6 +127,15 @@ public class Posting implements java.io.Serializable {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	@Column(name = "Title", nullable = false, length = 50)
+	public String getTitle() {
+		return this.title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "posting")

@@ -1,6 +1,6 @@
-package com.eas.model;
+package com.eas.newmodel;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -19,15 +19,15 @@ import javax.persistence.Table;
  * Test entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "test", catalog = "eas24")
+@Table(name = "test", catalog = "eas30")
 public class Test implements java.io.Serializable {
 
 	// Fields
 
 	private Integer testId;
 	private Classinfo classinfo;
-	private Float totalPoints;
-	private Timestamp testDate;
+	private float totalPoints;
+	private Date testDate;
 	private Set<Question> questions = new HashSet<Question>(0);
 	private Set<Sheet> sheets = new HashSet<Sheet>(0);
 
@@ -38,14 +38,14 @@ public class Test implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Test(Classinfo classinfo, Float totalPoints, Timestamp testDate) {
+	public Test(Classinfo classinfo, float totalPoints, Date testDate) {
 		this.classinfo = classinfo;
 		this.totalPoints = totalPoints;
 		this.testDate = testDate;
 	}
 
 	/** full constructor */
-	public Test(Classinfo classinfo, Float totalPoints, Timestamp testDate,
+	public Test(Classinfo classinfo, float totalPoints, Date testDate,
 			Set<Question> questions, Set<Sheet> sheets) {
 		this.classinfo = classinfo;
 		this.totalPoints = totalPoints;
@@ -77,20 +77,20 @@ public class Test implements java.io.Serializable {
 	}
 
 	@Column(name = "TotalPoints", nullable = false, precision = 12, scale = 0)
-	public Float getTotalPoints() {
+	public float getTotalPoints() {
 		return this.totalPoints;
 	}
 
-	public void setTotalPoints(Float totalPoints) {
+	public void setTotalPoints(float totalPoints) {
 		this.totalPoints = totalPoints;
 	}
 
 	@Column(name = "Test_Date", nullable = false, length = 19)
-	public Timestamp getTestDate() {
+	public Date getTestDate() {
 		return this.testDate;
 	}
 
-	public void setTestDate(Timestamp testDate) {
+	public void setTestDate(Date testDate) {
 		this.testDate = testDate;
 	}
 

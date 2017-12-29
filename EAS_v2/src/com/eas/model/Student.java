@@ -1,4 +1,4 @@
-package com.eas.model;
+package com.eas.newmodel;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -6,6 +6,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -14,7 +16,7 @@ import javax.persistence.Table;
  * Student entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "student", catalog = "eas24")
+@Table(name = "student", catalog = "eas30")
 public class Student implements java.io.Serializable {
 
 	// Fields
@@ -22,6 +24,7 @@ public class Student implements java.io.Serializable {
 	private String SId;
 	private String stuPassword;
 	private String stuName;
+	private Set<Comment> comments = new HashSet<Comment>(0);
 	private Set<Sign> signs = new HashSet<Sign>(0);
 	private Set<Posting> postings = new HashSet<Posting>(0);
 	private Set<Teachingevaluation> teachingevaluations = new HashSet<Teachingevaluation>(
@@ -34,19 +37,18 @@ public class Student implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Student(String SId, String stuPassword, String stuName) {
-		this.SId = SId;
+	public Student(String stuPassword, String stuName) {
 		this.stuPassword = stuPassword;
 		this.stuName = stuName;
 	}
 
 	/** full constructor */
-	public Student(String SId, String stuPassword, String stuName,
+	public Student(String stuPassword, String stuName, Set<Comment> comments,
 			Set<Sign> signs, Set<Posting> postings,
 			Set<Teachingevaluation> teachingevaluations) {
-		this.SId = SId;
 		this.stuPassword = stuPassword;
 		this.stuName = stuName;
+		this.comments = comments;
 		this.signs = signs;
 		this.postings = postings;
 		this.teachingevaluations = teachingevaluations;
@@ -54,6 +56,7 @@ public class Student implements java.io.Serializable {
 
 	// Property accessors
 	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "S_ID", unique = true, nullable = false, length = 30)
 	public String getSId() {
 		return this.SId;
@@ -79,6 +82,15 @@ public class Student implements java.io.Serializable {
 
 	public void setStuName(String stuName) {
 		this.stuName = stuName;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "student")
+	public Set<Comment> getComments() {
+		return this.comments;
+	}
+
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "student")
