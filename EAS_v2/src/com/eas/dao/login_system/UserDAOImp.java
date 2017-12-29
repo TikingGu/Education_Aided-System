@@ -6,10 +6,10 @@ import com.eas.util.HibernateDAO;
 
 @Repository("UserDAO")
 public class UserDAOImp extends HibernateDAO implements UserDAO {
-	public boolean Slogin(String id,String pw){
+	public int Slogin(String id,String pw){
 		return super.Slogin(id, pw);
 	}
-	public boolean Tlogin(String id,String pw){
+	public int Tlogin(String id,String pw){
 		return super.Tlogin(id, pw);
 	}
 }

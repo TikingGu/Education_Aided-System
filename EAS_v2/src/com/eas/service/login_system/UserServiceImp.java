@@ -10,10 +10,10 @@ import com.eas.dao.login_system.UserDAO;
 public class UserServiceImp implements UserServiceI {
 	@Resource(name="UserDAO")
 	private UserDAO userDAO;
-	public boolean Slogin(String id,String pw){
+	public int Slogin(String id,String pw){
 		return userDAO.Slogin(id,pw);
 	}
-	public boolean Tlogin(String id,String pw){
+	public int Tlogin(String id,String pw){
 		return userDAO.Tlogin(id, pw);
 	}
 }

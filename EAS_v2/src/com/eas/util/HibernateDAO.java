@@ -120,17 +120,21 @@ public class HibernateDAO {
 	}
 	}
 	/*老师和学生的登陆判断*/
-	public boolean Tlogin(String id,String pw){
+	public int Tlogin(String id,String pw){
 		try{
 			System.out.println(id);
 			System.out.println(pw);
 			init();
-		String hql="from Teacher as t Where t.TId=? and t.tpassword=?";
-		List<Teacher> n=session.createQuery(hql).setParameter(0, id).setParameter(1, pw).list();
+		String hql="from Teacher as t Where t.TId=?";
+		List<Teacher> n=session.createQuery(hql).setParameter(0, id).list();
 		if(!n.isEmpty())
-			return true;
+			if(n.get(0).getTpassword().equals(pw)){
+				return 1;
+			}else{
+				return -2;
+			}
 		else {
-			return false;
+			return -1;
 		}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -141,15 +145,20 @@ public class HibernateDAO {
 			}
 		return false;
 		}			
-	public boolean Slogin(String id,String pw){
+	public int Slogin(String id,String pw){
 		
-		try{init();
-		String hql="from Student as s Where s.SId=? and s.stuPassword=?";
-		List<Student> n=session.createQuery(hql).setParameter(0, id).setParameter(1, pw).list();
+		try{
+			init();
+		String hql="from Student as s Where s.SId=?";
+		List<Student> n=session.createQuery(hql).setParameter(0, id).list();
 		if(!n.isEmpty())
-			return true;
+			if(n.get(0).getStuPassword.equals(pw)){
+				return 1;
+			}else{
+				return -2;
+			}
 		else {
-			return false;
+			return -1;
 		}
 		}catch(Exception e){
 			e.printStackTrace();
