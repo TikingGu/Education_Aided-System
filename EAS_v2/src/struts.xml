@@ -15,7 +15,33 @@
         <action name="test" class="testAction">
             <result name="success">/test.jsp</result>
         </action>
-       
+
     </package>
 
+    <!-- 签到老师端 -->
+    <package name="rollcall_teacher" namespace="/rollcall/teacher" extends="struts-default">
+        <action name="launch">
+            <result name="success">/WEB-INF/pages/rollcall/teacher/launch.jsp</result>
+        </action>
+        <action name="create" class="com.eas.action.rollcall_system.TeacherAction" method="create">
+            <result name="success">/WEB-INF/pages/rollcall/success.jsp</result>
+            <result name="error">/WEB-INF/pages/rollcall/error.jsp</result>
+        </action>
+        <action name="list" class="com.eas.action.rollcall_system.TeacherAction" method="list">
+            <result name="success">/WEB-INF/pages/rollcall/teacher/list.jsp</result>
+        </action>
+        <action name="detail">
+            <result name="success">/WEB-INF/pages/rollcall/teacher/detail.jsp</result>
+        </action>
+    </package>
+
+    <!-- 签到学生端 -->
+    <package name="rollcall_student" namespace="/rollcall/student" extends="struts-default">
+        <action name="list">
+            <result name="success">/WEB-INF/pages/rollcall/student/list.jsp</result>
+        </action>
+        <action name="detail">
+            <result name="success">/WEB-INF/pages/rollcall/student/detail.jsp</result>
+        </action>
+    </package>
 </struts>
