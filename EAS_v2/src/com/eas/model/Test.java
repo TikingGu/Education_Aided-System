@@ -19,7 +19,7 @@ import javax.persistence.Table;
  * Test entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "test", catalog = "eas30")
+@Table(name = "test", catalog = "eas")
 public class Test implements java.io.Serializable {
 
 	// Fields
