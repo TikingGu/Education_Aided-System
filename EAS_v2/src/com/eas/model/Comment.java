@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * Comment entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "comment", catalog = "eas30")
+@Table(name = "comment", catalog = "eas")
 public class Comment implements java.io.Serializable {
 
 	// Fields

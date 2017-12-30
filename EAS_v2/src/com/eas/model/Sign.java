@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * Sign entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "sign", catalog = "eas30")
+@Table(name = "sign", catalog = "eas")
 public class Sign implements java.io.Serializable {
 
 	// Fields

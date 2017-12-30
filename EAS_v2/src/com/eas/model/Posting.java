@@ -19,7 +19,7 @@ import javax.persistence.Table;
  * Posting entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "posting", catalog = "eas30")
+@Table(name = "posting", catalog = "eas")
 public class Posting implements java.io.Serializable {
 
 	// Fields

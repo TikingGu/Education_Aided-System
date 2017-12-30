@@ -51,11 +51,13 @@ public class loginAction extends ActionSupport {
 			if(p.equals("s")){
 				login=userServiceI.Slogin(id, Password);
 			}
+			System.out.println(login);
 			response.getWriter().print(login);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+ 	    	
 			return null;
        }
 }
