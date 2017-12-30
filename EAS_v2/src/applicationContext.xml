@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:tx="http://www.springframework.org/schema/tx"
@@ -48,4 +48,7 @@
   </bean>
   <!-- 注解驱动 -->
   <tx:annotation-driven transaction-manager="txManager"/>
+  <bean id="test" class="com.eas.model.Test"></bean>
+  <bean id="question" class="com.eas.model.Question"></bean>
+  <bean id="sheet" class="com.eas.model.Sheet"></bean>
 </beans>
