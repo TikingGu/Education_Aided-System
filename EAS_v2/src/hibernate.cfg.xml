@@ -52,6 +52,7 @@
 		<mapping class="com.eas.model.Classinfo" />
 		<mapping class="com.eas.model.Replies" />
 		<mapping class="com.eas.model.Course" />
+		<mapping class="com.eas.model.Question" />
 
 	</session-factory>
 </hibernate-configuration>
