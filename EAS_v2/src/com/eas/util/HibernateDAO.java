@@ -1,4 +1,4 @@
-package com.eas.util;
+﻿package com.eas.util;
 
 import java.util.List;
 
@@ -167,4 +167,66 @@ public class HibernateDAO {
 			}
 		return -1;
 		}
+
+        /*查询老师的评教结果*/
+	public List<String> findA1by(String EClass){
+		try{
+			init();
+			String hql="select Te.a1 from Teachingevaluation as Te where Te.EClass=?";
+			List<String> n1=session.createQuery(hql).setParameter(0,EClass).list();
+			return n1;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			transaction.commit();
+			destory();
+		}
+		return null;
+	}
+	public List<String> findA2by(String EClass){
+		try{
+			init();
+			String hql="select Te.a2 from Teachingevaluation as Te where Te.EClass=?";
+			List<String> n2=session.createQuery(hql).setParameter(0,EClass).list();
+			return n2;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			transaction.commit();
+			destory();
+		}
+		return null;
+	}
+	public List<String> findA3by(String EClass){
+		try{
+			init();
+			String hql="select Te.a3 from Teachingevaluation as Te where Te.EClass=?";
+			List<String> n3=session.createQuery(hql).setParameter(0,EClass).list();
+			return n3;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			transaction.commit();
+			destory();
+		}
+		return null;
+	}
+	public List<String> findA4by(String EClass){
+		try{
+			init();
+			String hql="select Te.a4 from Teachingevaluation as Te where Te.EClass=?";
+			List<String> n4=session.createQuery(hql).setParameter(0,EClass).list();
+			return n4;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			transaction.commit();
+			destory();
+		}
+		return null;
+	}
 }
