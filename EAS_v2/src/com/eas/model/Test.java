@@ -28,6 +28,7 @@ public class Test implements java.io.Serializable {
 	private Classinfo classinfo;
 	private float totalPoints;
 	private Date testDate;
+	private String title;
 	private Set<Question> questions = new HashSet<Question>(0);
 	private Set<Sheet> sheets = new HashSet<Sheet>(0);
 
@@ -93,7 +94,16 @@ public class Test implements java.io.Serializable {
 	public void setTestDate(Date testDate) {
 		this.testDate = testDate;
 	}
+	
+	@Column(name = "Title", nullable = true, length = 50)
+	public String getTitle() {
+		return this.title;
+	}
 
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "test")
 	public Set<Question> getQuestions() {
 		return this.questions;
