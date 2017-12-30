@@ -224,4 +224,21 @@ public class HibernateDAO {
 		}
 		return null;
 	}
+        /*通过sid来查询课程的全部信息*/
+	public List<Course> findCourseInfby(String sid){
+		try{
+			init();
+			String hql="select cf.course from Classinfo as cf where cf.classId IN "
+					+ "(select t.EClass from Teachingevaluation as t where t.sid=?)";
+			List<Course> k=session.createQuery(hql).setParameter(0,sid).list();
+			return k;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			transaction.commit();
+			destory();
+		}
+		return null;
+	}
 }
