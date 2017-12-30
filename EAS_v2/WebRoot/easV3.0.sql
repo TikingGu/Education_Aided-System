@@ -202,6 +202,7 @@ CREATE TABLE `test` (
   `Test_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '测验ID',
   `Class_ID` varchar(30) NOT NULL COMMENT '班级ID',
   `TotalPoints` float NOT NULL COMMENT '测验总分',
+  `Title` varchar(50),
   `Test_Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '测验日期',
   PRIMARY KEY (`Test_ID`),
   KEY `test_cid` (`Class_ID`),
