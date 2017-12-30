@@ -130,12 +130,7 @@ public class HibernateDAO {
 		if(!n.isEmpty())
 			if(n.get(0).getTpassword().equals(pw)){
 				return 1;
-			}else{
-				return -2;
 			}
-		else {
-			return -1;
-		}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -143,7 +138,7 @@ public class HibernateDAO {
 			transaction.commit();
 			destory();
 			}
-		return -1;
+		return -2;
 		}			
 	public int Slogin(String id,String pw){
 		
@@ -154,12 +149,7 @@ public class HibernateDAO {
 		if(!n.isEmpty())
 			if(n.get(0).getStuPassword().equals(pw)){
 				return 1;
-			}else{
-				return -2;
 			}
-		else {
-			return -1;
-		}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -167,6 +157,6 @@ public class HibernateDAO {
 			transaction.commit();
 			destory();
 			}
-		return -1;
+		return -2;
 		}
 }
