@@ -150,7 +150,7 @@ public class HibernateDAO {
 		List<Student> n=session.createQuery(hql).setParameter(0, id).list();
 		if(!n.isEmpty())
 			if(n.get(0).getStuPassword().equals(pw)){
-				return 1;
+				return 0;
 			}else{
 				return -2;
 			}
