@@ -15,7 +15,13 @@
         <action name="test" class="testAction">
             <result name="success">/test.jsp</result>
         </action>
+<<<<<<< HEAD:EAS_v2/WebRoot/WEB-INF/classes/struts.xml
        
     </package>
 
 </struts>
+=======
+
+    </package>
+</struts>
+>>>>>>> 42717b619610128d059b194a2ad60f26ec0681c4:EAS_v2/WebRoot/WEB-INF/classes/struts.xml

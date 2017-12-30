@@ -55,4 +55,8 @@
 		<mapping class="com.eas.model.Question" />
 
 	</session-factory>
+<<<<<<< HEAD
 </hibernate-configuration>
+=======
+</hibernate-configuration>
+>>>>>>> 42717b619610128d059b194a2ad60f26ec0681c4
