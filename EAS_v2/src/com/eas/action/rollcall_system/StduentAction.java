@@ -2,7 +2,7 @@ package com.eas.action.rollcall_system;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class StudentAction extends ActionSupport {
+public class StduentAction extends ActionSupport {
 	/**
 	 * 
 	 */
