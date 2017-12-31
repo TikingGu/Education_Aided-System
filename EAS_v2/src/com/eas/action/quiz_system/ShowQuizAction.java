@@ -3,6 +3,7 @@ package com.eas.action.quiz_system;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -44,6 +45,8 @@ public class ShowQuizAction extends ActionSupport{
 		try{
 //			quizid=11;
 			questions=quizService.get_questionlist(quizid);
+                        ServletActionContext.getRequest().setAttribute("questionList",questions);
+
 			System.out.println(questions.get(0).getQuestionTitle());
 			return "success";
 		}catch(Exception exception){
