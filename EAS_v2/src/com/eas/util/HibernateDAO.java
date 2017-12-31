@@ -292,4 +292,20 @@ public class HibernateDAO {
 		}
 		return null;
 	}
+        /*根据courseid查出classid*/
+	public List<String> findClassIdby(String courseId){
+		try{
+			init();
+			String hql="select cf.classId from Classinfo as cf where cf.course.courseId=?)";
+			List<String> c=session.createQuery(hql).setParameter(0,courseId).list();
+			return c;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			transaction.commit();
+			destory();
+		}
+		return null;
+	}
 }
