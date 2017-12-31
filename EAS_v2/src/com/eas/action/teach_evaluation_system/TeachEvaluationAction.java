@@ -6,6 +6,8 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
+
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -99,15 +101,16 @@ public class TeachEvaluationAction extends ActionSupport {
 		String str = format.format(new Date());
 
 		Teachingevaluation TE=new Teachingevaluation();
-		
+
+		Student stu=(Student) ActionContext.getContext().getSession().get("student");
+		sid=stu.getSId();
+
 		Student st=new Student();
 		st.setSId(sid);
 		TE.setStudent(st);
 		Classinfo cl=new Classinfo();
 		cl.setClassId(e_class);
 		TE.setClassinfo(cl);
-		/*TE.setSid(sid);
-		TE.setEClass(e_class);*/
 		TE.setA1(a1);
 		TE.setA2(a2);
 		TE.setA3(a3);
