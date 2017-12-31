@@ -53,5 +53,6 @@
 		<mapping class="com.eas.model.Course" />
 		<mapping class="com.eas.model.Question" />
 		<mapping class="com.eas.model.rollcall_system.Rollcall" />
+		<mapping class="com.eas.model.homework_evaluation_system.HomeworkComment" />
 	</session-factory>
 </hibernate-configuration>
