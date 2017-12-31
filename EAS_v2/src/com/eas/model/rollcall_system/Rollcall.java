@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
-@Table(name="lsy_rollcall")
+@Table(name="rollcall")
 public class Rollcall {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)

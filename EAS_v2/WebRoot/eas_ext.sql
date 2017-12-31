@@ -1,4 +1,4 @@
- CREATE TABLE `lsy_rollcall` (
+ CREATE TABLE `rollcall` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `C_IDS` varchar(255) DEFAULT NULL,
   `code` varchar(255) DEFAULT NULL,
