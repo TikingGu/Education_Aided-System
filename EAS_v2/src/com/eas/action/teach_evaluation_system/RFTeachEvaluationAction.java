@@ -18,6 +18,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 
 import com.eas.model.Course;
+import com.eas.model.Student;
 import com.eas.service.teach_evaluation_system.RFTeachEvaluationServiceI;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
