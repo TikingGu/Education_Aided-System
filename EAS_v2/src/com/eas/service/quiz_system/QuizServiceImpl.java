@@ -160,4 +160,10 @@ public class QuizServiceImpl implements QuizService {
 	public Sheet get_sheet(String sid,Integer quizid){
 		return sheetdao.findBySidAndQid(sid,quizid);
 	}
+	
+	@Override
+	public int get_latest_quizid(String classid){
+		return testdao.get_latest_quizid(classid);
+	}
+	
 }

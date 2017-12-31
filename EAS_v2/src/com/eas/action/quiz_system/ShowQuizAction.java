@@ -44,8 +44,11 @@ public class ShowQuizAction extends ActionSupport{
 	public String execute(){
 		try{
 //			quizid=11;
+			String classid=(String) ServletActionContext.getRequest().getSession().getAttribute("classId");
+			System.out.println("classid "+classid);
+			quizid=quizService.get_latest_quizid(classid);
 			questions=quizService.get_questionlist(quizid);
-                        ServletActionContext.getRequest().setAttribute("questionList",questions);
+            ServletActionContext.getRequest().setAttribute("questionList",questions);
 
 			System.out.println(questions.get(0).getQuestionTitle());
 			return "success";

@@ -114,6 +114,16 @@ public class TestDAOImpl implements TestDAO{
 		}
 	}
 	
+	public int get_latest_quizid(String classid){
+		try {
+			String queryString = "select max(model.testId) from Test as model where model.classinfo.classId=?";
+			int instance = (Integer) getCurrentSession().createQuery(queryString).setParameter(0, classid).uniqueResult();
+			return instance;
+		} catch (RuntimeException re) {
+			throw re;
+		}
+	}
+	
 	public List<Test> findByClassinfo(Classinfo classinfo) {
 		try {
 			String queryString = "from Test as model where model.classinfo=?";

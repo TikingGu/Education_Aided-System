@@ -42,6 +42,12 @@ public interface TestDAO {
 	 * @return
 	 */
 	public Classinfo find_classinfo(String classid);
+	/**
+	 * 根据课程id返回最新的小测id
+	 * @param classid
+	 * @return
+	 */
+	public int get_latest_quizid(String classid);
 	public List<Test> findByProperty(String propertyName, Object value);
 	public List<Test> findAll();
 	public void attachDirty(Test instance) ;

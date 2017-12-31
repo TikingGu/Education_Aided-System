@@ -99,4 +99,11 @@ public interface QuizService {
 	 * @return
 	 */
 	public Sheet get_sheet(String sid,Integer quizid);
+	
+	/**
+	 * 根据课程id返回最新的小测id
+	 * @param classid
+	 * @return
+	 */
+	public int get_latest_quizid(String classid);
 }
