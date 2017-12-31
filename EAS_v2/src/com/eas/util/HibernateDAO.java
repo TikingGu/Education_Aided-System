@@ -263,8 +263,8 @@ public class HibernateDAO {
 	public List<Course> findCourseInfby(String sid){
 		try{
 			init();
-			String hql="select cf.course from Classinfo as cf where cf.classId IN "
-					+ "(select t.EClass from Teachingevaluation as t where t.sid=?)";
+			String hql="select cf.course from Classinfo as cf where cf IN "
+					+ "(select t.classinfo from Teachingevaluation as t where t.sid=?)";
 			List<Course> k=session.createQuery(hql).setParameter(0,sid).list();
 			return k;
 		}catch(Exception e){
