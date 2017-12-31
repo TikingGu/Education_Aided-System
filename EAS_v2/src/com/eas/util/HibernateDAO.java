@@ -264,7 +264,7 @@ public class HibernateDAO {
 		try{
 			init();
 			String hql="select cf.course from Classinfo as cf where cf IN "
-					+ "(select t.classinfo from Teachingevaluation as t where t.sid=?)";
+					+ "(select t.classinfo from Teachingevaluation as t where t.student.SId=?)";
 			List<Course> k=session.createQuery(hql).setParameter(0,sid).list();
 			return k;
 		}catch(Exception e){
