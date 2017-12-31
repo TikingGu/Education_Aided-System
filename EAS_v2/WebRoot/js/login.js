@@ -1,28 +1,32 @@
 $(function () {
 	
-	
+
     $('#login_submit').click(function () {
         if (!validLogin()) {
             return;
         }
 		
 		
-	var postdata = "paperNO="+$.trim($("#username").val())+"&pwd="+ $.trim($("#password").val());
+	var postdata = "id="+$.trim($("#username").val())+"&password="+ $.trim($("#password").val());
 	ajax(
     		  {
 			  	method:'POST',
-	    		url:'readerLoginAction_login.action',
+	    		url:'loginaction.action',
 				params: postdata,
 	    		callback:function(data) {
-	    			
-					if (data == 1) {
-	                    window.location.href = "reader.jsp";
+	    			if(data==0){
+	    				window.location.href = "teacher_inf_display.jsp";
+	    			}
+	    			else if (data == 1) {
+
+	                    window.location.href = "student_inf_display.jsp";
 	                } else if (data == -1) {
 	                    showInfo("账号不存在");
 	                } else if (data == -2) {
 	                    showInfo("密码错误");
 	                } else {
-	                    showInfo("登录失败，请重试");
+	                	showInfo(data);
+	                    
 	                }
 								
 				}

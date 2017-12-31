@@ -27,7 +27,7 @@
         }
     </style>
 
-<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/jQuery/jquery-3.1.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
 
@@ -53,8 +53,9 @@
                 
                 <input type="button" value="to student inf" 
 onclick="javascrtpt:window.location.href='student_inf_display.jsp'">
-                <!--  <input type="button" class="btn btn-lg btn-primary" href="student_inf_display.jsp" 
-                id="l_submit" value="登&nbsp;&nbsp;&nbsp;&nbsp;录"/>-->
+
+                  <input type="button" class="btn btn-lg btn-primary" 
+                id="login_submit" value="登&nbsp;&nbsp;&nbsp;&nbsp;录"/>
             </form>
         </div>
     </div>
