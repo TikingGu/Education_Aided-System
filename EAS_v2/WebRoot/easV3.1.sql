@@ -83,6 +83,7 @@ CREATE TABLE `posting` (
   `Po_Student` varchar(30) NOT NULL COMMENT '发帖学生ID',
   `Content` varchar(500) NOT NULL COMMENT '内容',
   `Title` varchar(50) NOT NULL COMMENT '标题',
+  `classid` varchar(30) NOT NULL,
   PRIMARY KEY (`Po_ID`),
   KEY `po_sid` (`Po_Student`),
   CONSTRAINT `po_sid` FOREIGN KEY (`Po_Student`) REFERENCES `student` (`S_ID`)
@@ -100,7 +101,6 @@ CREATE TABLE `question` (
   `Option2` varchar(30) DEFAULT NULL COMMENT '选项2',
   `Option3` varchar(30) DEFAULT NULL COMMENT '选项3',
   `Option4` varchar(30) DEFAULT NULL COMMENT '选项4',
-  `Point` float NOT NULL COMMENT '分值',
   `testid` int(11) NOT NULL COMMENT '测验ID',
   PRIMARY KEY (`QuestionID`),
   KEY `test__id` (`testid`),
