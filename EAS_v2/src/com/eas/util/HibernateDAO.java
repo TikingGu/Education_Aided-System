@@ -276,4 +276,20 @@ public class HibernateDAO {
 		}
 		return null;
 	}
+        /*通过tid来查询课程的全部信息*/
+	public List<Course> findCourseby(Teacher teacher){
+		try{
+			init();
+			String hql="select cf.course from Classinfo as cf where cf.teacher=?)";
+			List<Course> e=session.createQuery(hql).setParameter(0,teacher).list();
+			return e;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			transaction.commit();
+			destory();
+		}
+		return null;
+	}
 }
