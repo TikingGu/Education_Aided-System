@@ -89,7 +89,7 @@ public class InsertQuizAction extends ActionSupport{
 		
 		int temp=quizService.read_in_quiz(classid, quizname,points);
 		
-//		System.out.println(temp);
+		System.out.println(temp);
 //		System.out.println(question.getOption1());
 		
 //		quizService.read_in_question(question, temp);
@@ -106,7 +106,7 @@ public class InsertQuizAction extends ActionSupport{
 	@Action(value="toModifyQuiz",results={
 			@Result(name="success",location="/modifyQuiz.jsp")})
 	public String tomodify(){
-//		quizid=11;
+		quizid=4;
 		quizname=quizService.get_quiz(quizid).getTitle();
 		points=quizService.get_quiz(quizid).getTotalPoints();
 		questions=quizService.get_questionlist(quizid);
@@ -116,7 +116,7 @@ public class InsertQuizAction extends ActionSupport{
 	@Action(value="showQuizResult",results={
 			@Result(name="success",location="/QuizResult.jsp")})
 	public String quizresult(){
-//		quizid=11;
+//		quizid=5;
 		quizname=quizService.get_quiz(quizid).getTitle();
 		points=quizService.get_quiz(quizid).getTotalPoints();
 		quizresult=quizService.get_quiz_result(quizid);

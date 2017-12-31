@@ -2,6 +2,10 @@ package com.eas.action.quiz_system;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -11,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import com.eas.model.Test;
 import com.eas.service.quiz_system.QuizService;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 @Component
 @ParentPackage(value = "struts-default")
@@ -40,6 +45,7 @@ public class LoadQuizAction extends ActionSupport{
 			@Result(name="success",location="/loadQuizSuccess.jsp")})
 	public String execute(){
 		//quizs=quizService.get_quizlist(classid);
+//		ServletActionContext.getRequest().getSession().setAttribute("id", "s915102");
 		quizs=quizService.get_quizlist(classid);
 		while(!quizs.isEmpty()){
 			System.out.println(quizs.get(0).getTitle());
@@ -47,4 +53,18 @@ public class LoadQuizAction extends ActionSupport{
 		}
 		return "success";
 	}
+	
+	@Action(value="todeleteQuiz",results={
+			@Result(name="success",location="/todeleteQuiz.jsp")})
+	public String a(){
+		//quizs=quizService.get_quizlist(classid);
+		quizs=quizService.get_quizlist(classid);
+		while(!quizs.isEmpty()){
+			System.out.println(quizs.get(0).getTitle());
+			break;
+		}
+		return "success";
+	}
+	
+	
 }

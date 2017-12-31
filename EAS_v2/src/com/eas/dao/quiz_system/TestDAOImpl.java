@@ -59,7 +59,7 @@ public class TestDAOImpl implements TestDAO{
 	public Integer find(String courseid,String quizname) {
 		try {
 			String queryString = "select model.testId from Test as model where model.testDate=("
-					+ "select max(testDate) from Test as model where model.classId=? and "
+					+ "select max(testDate) from Test as model where model.classinfo.classId=? and "
 					+ " model.title=?)";
 			int quizid=(Integer) getCurrentSession().createQuery(queryString).setParameter(0, courseid)
 					.setParameter(1, quizname).uniqueResult();

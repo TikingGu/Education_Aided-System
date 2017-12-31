@@ -2,6 +2,7 @@ package com.eas.action.quiz_system;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -79,7 +80,8 @@ public class AnswerToQuizAction extends ActionSupport{
 		try{
 			questions=quizService.get_questionlist(quizid);
 			
-			String sid=(String) ActionContext.getContext().getSession().get("id");
+			String sid=(String) ServletActionContext.getRequest().getSession().getAttribute("id");
+			System.out.println("sid:"+sid);
 //			correctAnswerList=quizService.get_answer(quizid);
 			int count=0;
 			for(int i=0;i<getQuestions().size();i++){
@@ -89,7 +91,7 @@ public class AnswerToQuizAction extends ActionSupport{
 			}
 			score=(float)count*quizService.get_quiz(quizid).getTotalPoints()/getQuestions().size();
 //			float score=quizService.calculate_score(quizid, answerList.toString());
-//			System.out.println(score);
+			System.out.println(score);
 			quizService.read_in_sheet(quizid,sid,answerList,score);
 			return "success";
 		}catch(Exception exception){
@@ -101,8 +103,8 @@ public class AnswerToQuizAction extends ActionSupport{
 	@Action(value="myQuizResult",results={
 			@Result(name="success",location="/myQuizResult.jsp")})
 	public String myquizresult(){
-//		quizid=11;
-		String sid=(String) ActionContext.getContext().getSession().get("id");
+//		quizid=5;
+		String sid=(String) ServletActionContext.getRequest().getSession().getAttribute("id");
 		quizname=quizService.get_quiz(quizid).getTitle();
 		points=quizService.get_quiz(quizid).getTotalPoints();
 		score=quizService.get_sheet(sid, quizid).getScore();

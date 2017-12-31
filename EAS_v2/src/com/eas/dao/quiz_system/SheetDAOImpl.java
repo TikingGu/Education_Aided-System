@@ -39,7 +39,7 @@ public class SheetDAOImpl implements SheetDAO {
 	public Map<String,Float> getAllResult(Integer quizid){
 		try {
 			Map<String,Float> quizresult=new HashMap<String,Float>();
-			String queryString = "from Sheet as model where model.testid=?";
+			String queryString = "from Sheet as model where model.test.testId=?";
 			List<Sheet> sheets=getCurrentSession().createQuery(queryString).setParameter(0, quizid).list();
 			for(int i=0;i<sheets.size();i++){
 				quizresult.put(sheets.get(i).getSid(), sheets.get(i).getScore());
@@ -67,7 +67,7 @@ public class SheetDAOImpl implements SheetDAO {
 	@Override
 	public Sheet findBySidAndQid(String sid,Integer quizid){
 		try {
-			String queryString = "from Sheet as model where model.sid=? and model.testid=?";
+			String queryString = "from Sheet as model where model.sid=? and model.test.testId=?";
 			Sheet mysheet=(Sheet) getCurrentSession().createQuery(queryString).setParameter(0, sid)
 					.setParameter(1, quizid).uniqueResult();
 			return mysheet;

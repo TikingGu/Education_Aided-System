@@ -31,7 +31,7 @@ public class DeleteQuestionAction extends ActionSupport{
 			@Result(name="failure",location="/deleteQuestionFail.jsp")})
 	public String execute(){
 		try{
-//			setQuestionid(6);
+//			setQuestionid(1);
 			quizService.delete_question(questionid);
 			return "success";
 		}catch(Exception exception){
