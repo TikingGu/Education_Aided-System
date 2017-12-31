@@ -10,6 +10,22 @@ $(function() {
 
 });
 
+$(document).ready(function(){
+    //解决file的change事件只能执行一次的问题
+	window.alert('ajax');
+	$.ajax({
+        method: 'POST',
+        url: 'RFTeacherevaluationaction.action',
+        params: null,
+        type: "json",
+        callback: function(data) {
+            showInfo('success');
+           
+    }
+}
+);
+});
+
 
 
 function saveCourseId(id) {

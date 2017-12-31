@@ -60,7 +60,7 @@ String path = request.getContextPath();
 					<div class="panel-heading">
 						<h3 class="panel-title"> 课程 </h3>
 					</div>
-					<s:iterator items="" var="course">
+					<s:iterator value="" var="course">
 						<ul class="list-group">
 							<a class="list-group-item" href="<%=path%>/pages/course_homework_inf.jsp">
 								<b>课程名</b>

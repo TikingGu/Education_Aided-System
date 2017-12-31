@@ -26,8 +26,11 @@ String path = request.getContextPath();
   <!-- jQuery.js -->
   <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
   <script src="js/lizhiliang.js"></script>
-
-</head>
+<script src="${pageContext.request.contextPath}/jQuery/jquery-3.1.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/icheck.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/selectEvlCourse.js"></script>
+    </head>
 
 <body>
   <div class="container">
@@ -51,9 +54,9 @@ String path = request.getContextPath();
             class="img-rounded"
             alt="user avatar" />
             <p class="realname" title="&nbsp;">&nbsp; </p>
-            <p class="username" title="username">用户名</p>
-            <p class="username"> 学号 </p>
-            <a class="pull-right" href="student_inf_display.jsp"> 结束评教 </a>
+            <p class="username" title="username">用户名 <s:property value="#session.student.stuName"/></p>
+            <p class="username"> 学号 <s:property value="#session.student.SID"/></p>
+            <a class="pull-right" href="selectEvlCourse.jsp"> 开始评教 </a>
           </div>
         </div>
       </div>
@@ -85,15 +88,18 @@ String path = request.getContextPath();
                         </th>
                       </tr>
                     </thead>
-                    <s:if test="#request.pb.beanList!=null">
-                    <s:iterator value="#request.pb.beanList" var="course">
+                    <s:if test="#request.s!=null">
+                    <scripts>
+                    window.altert(#request.s)
+                    </scripts>
+                    <s:iterator value="#request.s" var="course">
                     <tbody>
-                     <td><s:property value="#course.id"/></td>
-                     <td><s:property value="#course.name"/></td>
+                     <td><s:property value="#course.courseId"/></td>
+                     <td><s:property value="#course.courseName"/></td>
                      <td><s:property value="#course.state"/></td>
-                     <td><s:date name="#course.date" format="yyyy-MM-dd" /></td>
+                     <td><s:date name="#course.period" /></td>
                      <td>
-                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#beginElv" onclick="saveCourseId(<s:property value="#course.id"/>)" >进行评教</button>
+                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" onclick="saveCourseId(<s:property value="#course.id"/>)" >进行评教</button>
                     </td>                                              
                   </tbody>
                 </s:iterator>
@@ -111,7 +117,7 @@ String path = request.getContextPath();
                     01/04/2012
                   </td>
                   <td>
-                       <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#beginElv" onclick="saveCourseId(<s:property value="#course.id"/>)" >进行评教</button>
+                       <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#BeginEvl" onclick="saveCourseId(<s:property value="#course.id"/>)" >进行评教</button>
                     </td>   
                 </tr>
                 <tr class="success">
@@ -125,8 +131,7 @@ String path = request.getContextPath();
                     01/04/2012
                   </td>
                   <td>
-                    Approved
-                  </td>
+                  ...                  </td>
                 </tr>
                 <tr class="error">
                   <td>
@@ -192,7 +197,7 @@ String path = request.getContextPath();
  <!--------------------------------------查看的模糊框------------------------>  
                                  <form class="form-horizontal">   <!--保证样式水平不混乱-->   
                                         <!-- 模态框（Modal） -->
-                  <div class="modal fade" id="beginElv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="BeginEvl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -207,83 +212,68 @@ String path = request.getContextPath();
                         
                     <!---------------------表单-------------------->
                      <div class="form-group">
-                      <label for="firstname" class="col-sm-3 control-label">借阅编号</label>
+                      <label for="firstname" class="col-sm-3 control-label">课堂氛围</label>
                         <div class="col-sm-7">
-                          <input type="checkbox" class="form-control" id="borrowId"  readonly="readonly">
-                        
+                          <label class="radio-inline">
+							  <input type="radio" name="a1" id="inlineRadio11" value="option1"> 1
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="a1" id="inlineRadio12" value="option2"> 2
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="a1" id="inlineRadio13" value="option3"> 3
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="a1" id="inlineRadio14" value="option3"> 4
+							</label>
                         </div>
-                    </div>
-                      
-                    <div class="form-group">  
-                      <label for="firstname" class="col-sm-3 control-label">借阅书籍ISBN号</label>
-                      <div class="col-sm-7">
-                        <input type="checkbox" class="form-control" id="ISBN"  readonly="readonly">
-
-                      </div>
-                    </div>
-                      
-                    <div class="form-group">  
-                      <label for="firstname" class="col-sm-3 control-label">借阅书籍名称</label>
-                        <div class="col-sm-7">
-                          <input type="checkbox" class="form-control" id="bookName"  readonly="readonly">
-                        
+                    
+                      <label for="firstname" class="col-sm-3 control-label">课堂氛围</label>
+                    <div class="col-sm-7">
+                          <label class="radio-inline">
+							  <input type="radio" name="a2" id="inlineRadio21" value="option1"> 1
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="a2" id="inlineRadio22" value="option2"> 2
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="a2" id="inlineRadio23" value="option3"> 3
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="a2" id="inlineRadio24" value="option3"> 4
+							</label>
                         </div>
-                    </div>
-                    <div class="form-group">  
-                      <label for="firstname" class="col-sm-3 control-label">借阅书籍类型</label>
-                        <div class="col-sm-7">
-                          <input type="checkbox" class="form-control" id="bookType"  readonly="readonly">
-                        
+                      <label for="firstname" class="col-sm-3 control-label">课堂氛围</label>
+                   <div class="col-sm-7">
+                          <label class="radio-inline">
+							  <input type="radio" name="a3" id="inlineRadio1" value="option1"> 1
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="a3" id="inlineRadio2" value="option2"> 2
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="a3" id="inlineRadio3" value="option3"> 3
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="a3" id="inlineRadio3" value="option3"> 4
+							</label>
                         </div>
-                    </div>
-                    
-                    <div class="form-group">  
-                      <label for="firstname" class="col-sm-3 control-label">读者证件号</label>
-                        <div class="col-sm-7">
-                          <input type="text" class="form-control" id="paperNO"  readonly="readonly">
-                    
+                        <label for="firstname" class="col-sm-3 control-label">课堂氛围</label>
+                    <div class="col-sm-7">
+                          <label class="radio-inline">
+							  <input type="radio" name="a4" id="inlineRadio1" value="option1"> 1
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="a4" id="inlineRadio2" value="option2"> 2
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="a4" id="inlineRadio3" value="option3"> 3
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="a4" id="inlineRadio3" value="option3"> 4
+							</label>
                         </div>
-                    </div>
-                    <div class="form-group">  
-                      <label for="firstname" class="col-sm-3 control-label">读者名称</label>
-                        <div class="col-sm-7">
-                          <input type="text" class="form-control" id="readerName"  readonly="readonly">
                     
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">  
-                      <label for="firstname" class="col-sm-3 control-label">读者类型</label>
-                        <div class="col-sm-7">
-                          <input type="text" class="form-control" id="readerType"  readonly="readonly">
-                    
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">  
-                      <label for="firstname" class="col-sm-3 control-label">逾期天数</label>
-                        <div class="col-sm-7">
-                          <input type="text" class="form-control" id="overday"  readonly="readonly">
-                    
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">  
-                      <label for="firstname" class="col-sm-3 control-label">操作管理员</label>
-                        <div class="col-sm-7">
-                          <input type="text" class="form-control" id="admin"  readonly="readonly">
-                    
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="form-group">  
-                      <label for="firstname" class="col-sm-3 control-label">归还状态</label>
-                        <div class="col-sm-7">
-                          <input type="text" class="form-control" id="state"  readonly="readonly">
-                    
-                        </div>
-                    </div>
                     
                     
                     <!---------------------表单-------------------->
@@ -297,7 +287,9 @@ String path = request.getContextPath();
                   </div>
 
                                  </form>  
-                <!--------------------------------------查看的模糊框------------------------>  
+
+ 
+
 
 </body>
 </html>

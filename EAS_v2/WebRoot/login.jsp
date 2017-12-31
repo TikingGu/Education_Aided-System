@@ -51,8 +51,6 @@
                     <label class="control-label" for="username" style="display:none;"></label>
                 </div>
                 
-                <input type="button" value="to student inf" 
-onclick="javascrtpt:window.location.href='student_inf_display.jsp'">
 
                   <input type="button" class="btn btn-lg btn-primary" 
                 id="login_submit" value="登&nbsp;&nbsp;&nbsp;&nbsp;录"/>

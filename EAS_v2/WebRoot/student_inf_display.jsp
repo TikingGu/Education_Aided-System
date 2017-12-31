@@ -51,12 +51,13 @@ String path = request.getContextPath();
             class="img-rounded"
             alt="user avatar" />
             <p class="realname" title="&nbsp;">&nbsp; </p>
-            <p class="username" title="username">用户名</p>
-            <p class="username"> 学号 </p>
+            <p class="username" title="username">用户名 <s:property value="#session.student.stuName"/></p>
+            <p class="username"> 学号 <s:property value="#session.student.SID"/></p>
             <a class="pull-right" href="selectEvlCourse.jsp"> 开始评教 </a>
           </div>
         </div>
       </div>
+ 
       <div class="col-xs-12 col-md-8">
         <!-- 课程信息 -->
         <div class="panel panel-default">
@@ -111,7 +112,7 @@ String path = request.getContextPath();
                     01/04/2012
                   </td>
                   <td>
-                    Default
+                    <button type="button" class="btn btn-info btn-xs"  onclick="window.location.href='course_inf_all.jsp'">前往上课</button>
                   </td>
                 </tr>
                 <tr class="success">
@@ -295,6 +296,65 @@ String path = request.getContextPath();
             </s:else>
 
           </table>
+          
+                    <s:if test="#request.pb!=null">
+					                    
+					                    		   <%-- 定义页码列表的长度，5个长 --%>
+								   <c:choose>
+									<%-- 第一条：如果总页数<=5，那么页码列表为1 ~ totaPage 从第一页到总页数--%>
+									<%--如果总页数<=5的情况 --%>
+									  <c:when test="${pb.totaPage <= 5 }">
+									    <c:set var="begin" value="1"/>
+									    <c:set var="end" value="${pb.totaPage }"/>
+									  </c:when>
+									  <%--总页数>5的情况 --%>
+									  <c:otherwise>
+										  	<%-- 第二条：按公式计算，让列表的头为当前页-2；列表的尾为当前页+2 --%>
+										  	<c:set var="begin" value="${pb.pageCode-2 }"/>
+										    <c:set var="end" value="${pb.pageCode+2 }"/>
+										    
+										    <%-- 第三条：第二条只适合在中间，而两端会出问题。这里处理begin出界！ --%>
+										    <%-- 如果begin<1，那么让begin=1，相应end=5 --%>
+										    <c:if test="${begin<1 }">
+										    	<c:set var="begin" value="1"/>
+										    	<c:set var="end" value="5"/>
+										    </c:if>
+										    <%-- 第四条：处理end出界。如果end>tp，那么让end=tp，相应begin=tp-4 --%>
+										    <c:if test="${end>pb.totaPage }">
+										    	<c:set var="begin" value="${pb.totaPage-4 }"/>
+										    	<c:set var="end" value="${pb.totaPage }"/>
+										    </c:if>
+									  </c:otherwise>
+								</c:choose>
+                    
+                        
+                        <div class="pull-right"><!--右对齐--->
+                           <ul class="pagination">
+                           <li class="disabled"><a href="#">第<s:property value="#request.pb.pageCode"/>页/共<s:property value="#request.pb.totaPage"/>页</a></li>
+                           <li><a href="${pageContext.request.contextPath}/reader/borrowAction_${pb.url }pageCode=1">首页</a></li>
+                           <li><a href="${pageContext.request.contextPath}/reader/borrowAction_${pb.url }pageCode=${pb.pageCode-1 }">&laquo;</a></li><!-- 上一页 -->
+                           <%-- 循环显示页码列表 --%>
+								<c:forEach begin="${begin }" end="${end }" var="i">
+								  <c:choose>
+								  <%--如果是当前页则设置无法点击超链接 --%>
+								  	<c:when test="${i eq pb.pageCode }">							  	
+								  			<li class="active"><a>${i }</a><li>							 
+								  	</c:when>
+								  	<c:otherwise>
+								  		<li><a href="${pageContext.request.contextPath}/reader/borrowAction_${pb.url }pageCode=${i}">${i}</a></li>
+								  	</c:otherwise>
+								  </c:choose>
+								</c:forEach>
+				        	   <%--如果当前页数没到总页数，即没到最后一页,则需要显示下一页 --%>
+							  <c:if test="${pb.pageCode < pb.totaPage }">
+								  <li><a href="${pageContext.request.contextPath}/reader/borrowAction_${pb.url }pageCode=${pb.pageCode+1}">&raquo;</a></li>
+							</c:if>
+							<%--否则显示尾页 --%>
+							<li><a href="${pageContext.request.contextPath}/reader/borrowAction_${pb.url }pageCode=${pb.totaPage}">尾页</a></li>
+							</ul>
+                           </div>
+                    </s:if>          
+          
         </div>
       </div>
     </div>

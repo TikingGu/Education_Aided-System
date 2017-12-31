@@ -15,11 +15,11 @@ $(function () {
 				params: postdata,
 	    		callback:function(data) {
 	    			if(data==0){
-	    				window.location.href = "teacher_inf_display.jsp";
+	    				window.location.href = "student_inf_display.jsp";
 	    			}
 	    			else if (data == 1) {
 
-	                    window.location.href = "student_inf_display.jsp";
+	                    window.location.href = "teacher_inf_display.jsp";
 	                } else if (data == -1) {
 	                    showInfo("账号不存在");
 	                } else if (data == -2) {

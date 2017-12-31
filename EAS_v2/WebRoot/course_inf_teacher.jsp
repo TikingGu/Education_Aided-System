@@ -23,10 +23,6 @@
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <script src="${pageContext.request.contextPath}/jQuery/jquery-3.1.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-    <!-- 幻灯片-->
-    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
-		<script src="${pageContext.request.contextPath}/js/ft-carousel.min.js" type="text/javascript" charset="utf-8"></script> 
-    
   </head>
   <div class="container">
     <div class="row clearfix">
