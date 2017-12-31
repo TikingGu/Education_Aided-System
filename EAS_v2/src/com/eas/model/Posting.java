@@ -32,6 +32,8 @@ public class Posting implements java.io.Serializable {
 	private Integer disagreeNum;
 	private String content;
 	private String title;
+	private String classid;
+	
 	private Set<Replies> replieses = new HashSet<Replies>(0);
 
 	// Constructors
@@ -138,6 +140,15 @@ public class Posting implements java.io.Serializable {
 		this.title = title;
 	}
 
+	@Column(name = "classid", nullable = false, length = 30)
+	public String getClassid() {
+		return this.classid;
+	}
+
+	public void setClassid(String c) {
+		this.classid = c;
+	}
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "posting")
 	public Set<Replies> getReplieses() {
 		return this.replieses;
