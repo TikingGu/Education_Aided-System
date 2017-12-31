@@ -9,8 +9,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import com.eas.model.Course;
 import com.eas.model.Student;
 import com.eas.model.Teacher;
+import com.eas.model.Teachingevaluation;
+
 
 public class HibernateDAO {
 	// 1:下面的方法默认加载hibernate.cfg.xml文件
