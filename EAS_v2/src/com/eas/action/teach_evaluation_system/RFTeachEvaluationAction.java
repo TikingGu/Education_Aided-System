@@ -40,12 +40,7 @@ public class RFTeachEvaluationAction extends ActionSupport {
 		sid=stu.getSId();
 		List<Course> s=rFTeachEvaluationServiceI.findCourseInfby(sid);
 		HttpServletResponse response=ServletActionContext.getResponse();
-		try {
-			response.getWriter().print(s);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ServletActionContext.getRequest().setAttribute("s", s);
  		return SUCCESS;
 	}
 }
