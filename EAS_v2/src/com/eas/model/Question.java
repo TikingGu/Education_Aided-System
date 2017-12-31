@@ -27,7 +27,6 @@ public class Question implements java.io.Serializable {
 	private String option2;
 	private String option3;
 	private String option4;
-	private float point;
 
 	// Constructors
 
@@ -36,17 +35,15 @@ public class Question implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Question(Test test, String questionTitle, String answer, float point) {
+	public Question(Test test, String questionTitle, String answer) {
 		this.test = test;
 		this.questionTitle = questionTitle;
 		this.answer = answer;
-		this.point = point;
 	}
 
 	/** full constructor */
 	public Question(Test test, String questionTitle, String answer,
-			String option1, String option2, String option3, String option4,
-			float point) {
+			String option1, String option2, String option3, String option4) {
 		this.test = test;
 		this.questionTitle = questionTitle;
 		this.answer = answer;
@@ -54,7 +51,6 @@ public class Question implements java.io.Serializable {
 		this.option2 = option2;
 		this.option3 = option3;
 		this.option4 = option4;
-		this.point = point;
 	}
 
 	// Property accessors
@@ -133,13 +129,5 @@ public class Question implements java.io.Serializable {
 		this.option4 = option4;
 	}
 
-	@Column(name = "Point", nullable = false, precision = 12, scale = 0)
-	public float getPoint() {
-		return this.point;
-	}
-
-	public void setPoint(float point) {
-		this.point = point;
-	}
 
 }
