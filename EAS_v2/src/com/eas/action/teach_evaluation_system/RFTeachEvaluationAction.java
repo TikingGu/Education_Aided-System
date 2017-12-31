@@ -28,14 +28,6 @@ import com.opensymphony.xwork2.ActionSupport;
 @ParentPackage("struts-default")
 public class RFTeachEvaluationAction extends ActionSupport {
 	private String sid;
-	public String getSid() {
-		return sid;
-	}
-
-	public void setSid(String sid) {
-		this.sid = sid;
-	}
-
 	@Resource(name="RFTeachEvaluationServiceI")
 	private RFTeachEvaluationServiceI rFTeachEvaluationServiceI;
 	@Action(value="RFTeacherevaluationaction"
@@ -43,7 +35,8 @@ public class RFTeachEvaluationAction extends ActionSupport {
    		@Result(name="success",location="/TeachEvaluationSuccess.jsp")})
 	public String execute(){
 		ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("/applicationContext.xml");//加载Spring配置文件，初始化IOC容器
-		String sid=(String) ActionContext.getContext().getSession().get("id");
+		Student stu=(Student) ActionContext.getContext().getSession().get("student");
+		sid=stu.getSId();
 		List<Course> s=rFTeachEvaluationServiceI.findCourseInfby(sid);
 		/*测试代码if(s.size()>0){
 			System.out.print((s.get(0)).getCourseId());
