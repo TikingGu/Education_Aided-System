@@ -26,7 +26,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @Controller
 @Namespace("/")
 @ParentPackage("struts-default")
-public String RFTeachEvaluationAction extends ActionSupport {
+public class RFTeachEvaluationAction extends ActionSupport {
 	private String sid;
 	public String getSid() {
 		return sid;
@@ -38,7 +38,7 @@ public String RFTeachEvaluationAction extends ActionSupport {
 
 	@Resource(name="RFTeachEvaluationServiceI")
 	private RFTeachEvaluationServiceI rFTeachEvaluationServiceI;
-	@Action(value="RFTeacherevaluationaction")
+	@Action(value="RFTeacherevaluationaction"
 			,results={
    		@Result(name="success",location="/TeachEvaluationSuccess.jsp")})
 	public String execute(){
