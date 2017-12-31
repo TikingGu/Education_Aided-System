@@ -39,17 +39,9 @@ public class RFTeachEvaluationAction extends ActionSupport {
 		Student stu=(Student) ActionContext.getContext().getSession().get("student");
 		sid=stu.getSId();
 		List<Course> s=rFTeachEvaluationServiceI.findCourseInfby(sid);
-		/*测试代码if(s.size()>0){
-			System.out.print((s.get(0)).getCourseId());
-		 System.out.print((s.get(0)).getCourseName());
-		System.out.print((s.get(0)).getPeriod());}
-		else
-			System.out.print("aaa");*/
 		HttpServletResponse response=ServletActionContext.getResponse();
 		try {
-			response.getWriter().print((s.get(0)).getCourseId());
-			response.getWriter().print((s.get(0)).getCourseName());
-			response.getWriter().print((s.get(0)).getPeriod());
+			response.getWriter().print(s);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
