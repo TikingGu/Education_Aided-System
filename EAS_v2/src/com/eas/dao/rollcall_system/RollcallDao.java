@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.eas.model.rollcall_system.Rollcall;
 
-@Repository (value = "hibernateDaoImpl")
+@Repository (value = "RollcallDaoRepo")
 @Transactional()
 public class RollcallDao {
 	@Resource(name = "sessionFactory")
