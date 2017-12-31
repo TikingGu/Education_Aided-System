@@ -153,7 +153,7 @@ public class HibernateDAO {
 		List<Student> n=session.createQuery(hql).setParameter(0, id).list();
 		if(!n.isEmpty())
 			if(n.get(0).getStuPassword().equals(pw)){
-				return 1;
+				return 0;
 			}else{
 				return -2;
 			}
@@ -166,6 +166,38 @@ public class HibernateDAO {
 			}
 		return -1;
 		}
+	
+	public Teacher get_teacher(String tid){
+		try{
+			init();
+			String hql="from Teacher as t Where t.TId=?";
+			List<Teacher> n=session.createQuery(hql).setParameter(0, tid).list();
+			return n.get(0);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			transaction.commit();
+			destory();
+			}
+		return null;
+	}
+	
+	public Student get_student(String sid){
+		try{
+			init();
+			String hql="from Student as s Where s.SId=?";
+			List<Student> n=session.createQuery(hql).setParameter(0, sid).list();
+			return n.get(0);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			transaction.commit();
+			destory();
+			}
+		return null;
+	}
         /*查询老师的评教结果*/
 	public List<String> findA1by(String EClass){
 		try{

@@ -52,6 +52,11 @@ public class loginAction extends ActionSupport {
 				login=userServiceI.Slogin(id, Password);
 			}
 			System.out.println(login);
+			if(login==0){
+				ActionContext.getContext().getSession().put("student", userServiceI.get_student(id));
+			}else if(login==1){
+				ActionContext.getContext().getSession().put("teacher", userServiceI.get_teacher(id));
+			}
 			response.getWriter().print(login);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
