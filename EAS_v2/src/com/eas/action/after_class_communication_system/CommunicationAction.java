@@ -82,13 +82,14 @@ public class CommunicationAction extends ActionSupport{
 	public void setPost(Posting p){
 		this.post=p;
 	}
-	@Action(value="loadPost",results={
+		@Action(value="loadPost",results={
 			@Result(name="success",location="/myPost.jsp"),
 			@Result(name="failure",location="/menu.jsp")})
 	public String loadpost(){
 		try{
 			classId=(String)ServletActionContext.getRequest().getSession().getAttribute("classId");
 			postlist=postService.get_postlist(classId);
+			ServletActionContext.getRequest().setAttribute("postlist", postlist);
 			return "success";
 		}catch(Exception exception){
 			exception.printStackTrace();
@@ -96,9 +97,7 @@ public class CommunicationAction extends ActionSupport{
 		return "failure";
 	}
 	
-	@Action(value="showPost",results={
-			@Result(name="success",location="/showPost.jsp"),
-			@Result(name="failure",location="/menu.jsp")})
+	@Action(value="showPost")
 	public String showpost(){
 		try{
 			post=postService.find_post(poId);
@@ -106,16 +105,16 @@ public class CommunicationAction extends ActionSupport{
 			for(Replies r:replieslist){
 				namelist.add(postService.find_name(r.getReStudent()));
 			}
-			return "success";
+			ServletActionContext.getRequest().setAttribute("post", post);
+			ServletActionContext.getRequest().setAttribute("replieslist", replieslist);
+			ServletActionContext.getRequest().setAttribute("namelist", namelist);
 		}catch(Exception exception){
 			exception.printStackTrace();
 		}
-		return "failure";
+		return null;
 	}
 	
-	@Action(value="replyPost",results={
-			@Result(name="success",location="/showPost.jsp"),
-			@Result(name="failure",location="/menu.jsp")})
+	@Action(value="replyPost")
 	public String replypost(){
 		try{
 			postService.insert_a_reply(poId,(String)ServletActionContext.getRequest().getSession().getAttribute("id"), content);
@@ -124,11 +123,13 @@ public class CommunicationAction extends ActionSupport{
 			for(Replies r:replieslist){
 				namelist.add(postService.find_name(r.getReStudent()));
 			}
-			return "success";
+			ServletActionContext.getRequest().setAttribute("post", post);
+			ServletActionContext.getRequest().setAttribute("replieslist", replieslist);
+			ServletActionContext.getRequest().setAttribute("namelist", namelist);
 		}catch(Exception exception){
 			exception.printStackTrace();
 		}
-		return "failure";
+		return null;
 	}
 	
 	@Action(value="agreePost",results={@Result(name="success",location="/showPost.jsp")})
