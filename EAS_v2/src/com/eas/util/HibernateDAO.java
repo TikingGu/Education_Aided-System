@@ -13,6 +13,7 @@ import com.eas.model.Course;
 import com.eas.model.Student;
 import com.eas.model.Teacher;
 import com.eas.model.Teachingevaluation;
+import com.eas.model.Vote;
 
 
 public class HibernateDAO {
@@ -291,6 +292,47 @@ public class HibernateDAO {
 			destory();
 		}
 		return null;
+	}
+        /*投票更新agreenum的值*/
+	public void updateAgreebyvoteId(String voteId){
+		try{
+			init();
+			String hql="from Vote as v where v.voteId=?";
+			List<Vote> v=session.createQuery(hql).setParameter(0, voteId).list();
+			Vote temp=v.get(0);
+			System.out.println(temp.getAgreeNum());
+			int a=temp.getAgreeNum()+1;
+			temp.setAgreeNum(a);
+//			((Vote) v).setAgreeNum((((Vote) v).getAgreeNum())+1);
+			session.save(temp);
+			System.out.print(a);
+			}
+			catch(Exception e){
+			e.printStackTrace();
+			}
+			finally{
+			transaction.commit();	
+			destory();
+			}
+	}
+	/*投票更新disagreenum的值*/
+	public void updateDisagreebyvoteId(String voteId){
+		try{
+			init();
+			String hql="from Vote as v where v.voteId=?";
+			List<Vote> v=session.createQuery(hql).setParameter(0, voteId).list();
+			Vote temp=v.get(0);
+			int a=temp.getAgreeNum()+1;
+			temp.setDisagreeNum(a);
+			session.save(temp);			
+			}
+			catch(Exception e){
+			e.printStackTrace();
+			}
+			finally{
+			transaction.commit();	
+			destory();
+			}
 	}
         /*根据courseid查出classid*/
 	public List<String> findClassIdby(String courseId){
