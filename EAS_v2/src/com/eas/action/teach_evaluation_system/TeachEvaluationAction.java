@@ -105,6 +105,7 @@ public class TeachEvaluationAction extends ActionSupport {
 
 		Student stu=(Student) ActionContext.getContext().getSession().get("student");
 		sid=stu.getSId();
+                e_class=(String) ServletActionContext.getRequest().getSession().getAttribute("Eclass");
 
 		Student st=new Student();
 		st.setSId(sid);
