@@ -1,22 +1,14 @@
 package com.eas.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 /**
  * Vote entity. @author MyEclipse Persistence Tools
  */
-@Entity
-@Table(name = "vote", catalog = "eas")
+
 public class Vote implements java.io.Serializable {
 
 	// Fields
 
-	private Integer voteId;
+	private String voteId;
 	private Integer agreeNum;
 	private Integer disagreeNum;
 
@@ -26,25 +18,28 @@ public class Vote implements java.io.Serializable {
 	public Vote() {
 	}
 
+	/** minimal constructor */
+	public Vote(String voteId) {
+		this.voteId = voteId;
+	}
+
 	/** full constructor */
-	public Vote(Integer agreeNum, Integer disagreeNum) {
+	public Vote(String voteId, Integer agreeNum, Integer disagreeNum) {
+		this.voteId = voteId;
 		this.agreeNum = agreeNum;
 		this.disagreeNum = disagreeNum;
 	}
 
 	// Property accessors
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "Vote_ID", unique = true, nullable = false)
-	public Integer getVoteId() {
+
+	public String getVoteId() {
 		return this.voteId;
 	}
 
-	public void setVoteId(Integer voteId) {
+	public void setVoteId(String voteId) {
 		this.voteId = voteId;
 	}
 
-	@Column(name = "AgreeNum")
 	public Integer getAgreeNum() {
 		return this.agreeNum;
 	}
@@ -53,7 +48,6 @@ public class Vote implements java.io.Serializable {
 		this.agreeNum = agreeNum;
 	}
 
-	@Column(name = "DisagreeNum")
 	public Integer getDisagreeNum() {
 		return this.disagreeNum;
 	}
