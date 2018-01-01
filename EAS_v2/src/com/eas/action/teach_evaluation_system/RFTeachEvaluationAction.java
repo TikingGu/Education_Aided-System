@@ -28,12 +28,22 @@ import com.opensymphony.xwork2.ActionSupport;
 @Namespace("/")
 @ParentPackage("struts-default")
 public class RFTeachEvaluationAction extends ActionSupport {
+	private String id;
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	private String sid;
 	@Resource(name="RFTeachEvaluationServiceI")
 	private RFTeachEvaluationServiceI rFTeachEvaluationServiceI;
 	@Action(value="RFTeacherevaluationaction"
 			,results={
-   		@Result(name="success",location="/selectEvlCourse.jsp")})
+   		@Result(name="Dis",location="/student_inf_display.jsp"),
+   		@Result(name="Evl",location="/selectEvlCourse.jsp")})
 	public String execute(){
 		ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("/applicationContext.xml");//加载Spring配置文件，初始化IOC容器
 		Student stu=(Student) ActionContext.getContext().getSession().get("student");
@@ -45,6 +55,17 @@ public class RFTeachEvaluationAction extends ActionSupport {
 		}else {
 		System.out.print(s);}
 		ServletActionContext.getRequest().setAttribute("s", s);
- 		return SUCCESS;
+		System.out.print(id);
+		if(id.equals("Dis")) {
+			return "Dis";
+		}else if(id.equals("Evl")) {
+			System.out.print("Evl");
+			return "Evl";
+			
+		}
+		else {
+			return null;
+		}
+ 		
 	}
 }

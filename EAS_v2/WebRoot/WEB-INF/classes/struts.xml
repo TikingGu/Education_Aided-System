@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC
     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
     "http://struts.apache.org/dtds/struts-2.0.dtd">
@@ -16,6 +16,50 @@
             <result name="success">/test.jsp</result>
         </action>
 
+    </package>
+
+   <package name="default" namespace="/" extends="struts-default">
+            <action name="fileUpload" class="com.eas.action.courseware_uploadanddownload_system.UploadAction">  
+            <interceptor-ref name="fileUpload">
+             	<param name="allowedTypes">application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+             	application/x-zip-compressed,application/msword,application/pdf,application/vnd.ms-powerpoint,image/jpeg,text/plain</param>  
+                <param name="maximumSize">10000000000</param>  
+            </interceptor-ref>  
+            <interceptor-ref name="defaultStack"></interceptor-ref>    
+            <result name="success">/WEB-INF/pages/UploadSuccess.jsp</result>
+            <result name="error">/WEB-INF/pages/UploadError.jsp</result>  
+             <result name ="input" >/WEB-INF/pages/UploadRepeat.jsp </result > 
+        	</action>
+        	<action name="download" class="com.eas.action.courseware_uploadanddownload_system.DownloadAction">   
+            <!-- 设置文件名参数，由页面上传入 -->   
+            <param name="fileName"></param>   
+            <result name="success" type="stream">   
+                <!-- 下载文件类型定义 -->   
+                <param name="contentType">application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+                application/x-zip-compressed,application/msword,application/pdf,application/vnd.ms-powerpoint,image/jpeg,text/plain</param>   
+                <!-- 下载文件处理方法 -->   
+                <param name="contentDisposition">   
+                    attachment;filename="${downloadChineseFileName}"  
+                </param>   
+                <!-- 下载文件输出流定义 -->   
+                <param name="inputName">downloadFile</param>   
+            </result>   
+        	</action>
+        	<action name="notice" class="com.eas.action.notice_system.NoticeAction">
+        	<result name="success">/WEB-INF/pages/Success.jsp</result>
+        	</action>
+        	<action name="downloadview" class="com.eas.action.courseware_uploadanddownload_system.FileInfoAction">
+        	<result name="success">/Web/Download.jsp</result>
+        	</action>
+        	<action name="classInfoview" class="com.eas.action.notice_system.NoticeInfoAction">
+        	<result name="success">/Web/Notice.jsp</result>
+        	</action>
+        	<action name="writeNotice" class="com.eas.action.notice_system.WriteNotice">
+        	<result name="success">/Web/Publish.jsp</result>
+        	</action>
+        	<action name="noticeInfoview" class="com.eas.action.notice_system.ShowNoticeAction">
+        	<result name="success">/Web/ShowNotice.jsp</result>
+        	</action>
     </package>
 
     <!-- 签到老师端 -->
@@ -44,4 +88,6 @@
             <result name="success">/WEB-INF/pages/rollcall/student/detail.jsp</result>
         </action>
     </package>
+    <constant name="struts.multipart.saveDir" value="E:/temp"></constant>
+    <constant name="struts.multipart.maxSize" value="10000000000"/>
 </struts>

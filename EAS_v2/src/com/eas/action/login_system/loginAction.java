@@ -44,7 +44,7 @@ public class loginAction extends ActionSupport {
 			int login=-1;
 			char c= getId().charAt(0);
 			String p = String.valueOf(c);
-			ActionContext.getContext().getSession().put("id ", id);
+			ServletActionContext.getRequest().getSession().setAttribute("id",id);
 			if(p.equals("t")){
 				login=userServiceI.Tlogin(id, Password);
 			}

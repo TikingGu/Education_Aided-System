@@ -49,7 +49,6 @@ public class ShowQuizAction extends ActionSupport{
 			quizid=quizService.get_latest_quizid(classid);
 			questions=quizService.get_questionlist(quizid);
             ServletActionContext.getRequest().setAttribute("questionList",questions);
-
 			System.out.println(questions.get(0).getQuestionTitle());
 			return "success";
 		}catch(Exception exception){

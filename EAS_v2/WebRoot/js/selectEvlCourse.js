@@ -5,10 +5,51 @@ $(function() {
     $('#modal_info').on('hide.bs.modal', function() { //提示模糊框隐藏时候触发
         location.reload(); //刷新当前页面
     });
+    	
+
+        $('#addAdmin').click(function () {
+
+    	 if (!validAddAdmin()) {
+            return;
+        }
+    	var postdata = "username="+$.trim($("#addUsername").val())+"&name="+$.trim($("#addName").val())+"&phone="+ $.trim($("#addPhone").val());
+    	ajax(
+        		  {
+    			  	method:'POST',
+    	    		url:'admin/adminManageAction_addAdmin.action',
+    				params: postdata,
+    	    		callback:function(data) {
+    					if (data == 1) {
+    						$("#addModal").modal("hide");//关闭模糊框		
+    						showInfo("添加成功");	
+
+    	                }else if (data == -1) {
+    						$("#addModal").modal("hide");//关闭模糊框		
+    						showInfo("该管理员已存在");	
+    					}else {
+    						$("#addModal").modal("hide");//关闭模糊框
+    						showInfo("添加失败");
+    					}
+    								
+    				}
+    			}
+    			   
+        	);
+    			
+    		
+    	});
+    	
 
 
 
 });
+
+
+function findCourse() {
+	window.location.href='RFTeacherevaluationaction.action?id=Evl'
+    
+}
+
 /*
 $(document).ready(function(){
     //解决file的change事件只能执行一次的问题

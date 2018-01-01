@@ -99,12 +99,14 @@ public class ManagePostAction extends ActionSupport{
 	}
 	
 	@Action(value="addPost",results={
-			@Result(name="success",location="/addpostSuccess.jsp"),
-			@Result(name="failure",location="/menu.jsp")})
+			@Result(name="success",location="/Posting.jsp"),
+			@Result(name="failure",location="/Posting.jsp")})
 	public String addpost(){
 		try{
+			Object obj=ServletActionContext.getRequest().getSession().getAttribute("Eclass");
+			classId=obj.toString(); 
 			String sid=(String)ServletActionContext.getRequest().getSession().getAttribute("id");
-			classId=(String)ServletActionContext.getRequest().getSession().getAttribute("classId");
+			//classId=(String)ServletActionContext.getRequest().getSession().getAttribute("classId");
 			postService.add_a_post(sid,title,content,classId);
 			return "success";
 		}catch(Exception exception){

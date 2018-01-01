@@ -30,7 +30,7 @@ String path = request.getContextPath();
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/icheck.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/selectEvlCourse.js"></script>
-    
+
    
     </head>
 
@@ -68,6 +68,7 @@ String path = request.getContextPath();
           <div class="panel-heading">
             <h3 class="panel-title">课程信息</h3>
           </div>
+           <button onclick="findCourse()">查看课程</button>
           <div class="panel-body">
 
             <div class="container" style="width: inherit;">
@@ -201,7 +202,7 @@ String path = request.getContextPath();
 
 
  <!--------------------------------------查看的模糊框------------------------>  
-                                 <form class="form-horizontal" href="TeachEvaluation.action">   <!--保证样式水平不混乱-->   
+                                 <form class="form-horizontal" action="TeachEvaluation.action">   <!--保证样式水平不混乱-->   
                                         <!-- 模态框（Modal） -->
                   <div class="modal fade" id="BeginEvl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">

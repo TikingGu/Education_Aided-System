@@ -28,9 +28,11 @@ String path = request.getContextPath();
   <script src="js/lizhiliang.js"></script>
    <script src="${pageContext.request.contextPath}/jQuery/jquery-3.1.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+
+   <script src="${pageContext.request.contextPath}/js/findCourse.js"></script>
 </head>
 
-<body>
+<body load()>
   <div class="container">
     <!--头部留白-->
     <div style="background-color: #ffffff;width: 100%;height: 80px;"></div>
@@ -54,17 +56,18 @@ String path = request.getContextPath();
             <p class="realname" title="&nbsp;">&nbsp; </p>
             <p class="username" title="username">用户名 <s:property value="#session.student.stuName"/></p>
             <p class="username"> 学号 <s:property value="#session.student.SID"/></p>
-            <a class="pull-right" href='RFTeacherevaluationaction.action'> 开始评教 </a>
+            <a class="pull-right" href='selectEvlCourse.jsp'> 开始评教 </a>
           </div>
         </div>
       </div>
  
-      <div class="col-xs-12 col-md-8">
+         <div class="col-xs-12 col-md-8">
         <!-- 课程信息 -->
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">课程信息</h3>
           </div>
+          <button onclick="findCourse()">查看课程</button>
           <div class="panel-body">
 
             <div class="container" style="width: inherit;">
@@ -80,22 +83,24 @@ String path = request.getContextPath();
                           课程
                         </th>
                         <th>
-                          学分
+                          学期
                         </th>
                         <th>
                           状态
                         </th>
                       </tr>
                     </thead>
-                    <s:if test="#request.pb.beanList!=null">
-                    <s:iterator value="#request.pb.beanList" var="course">
+                    
+                    <s:if test="#request!=null">
+                    <s:iterator value="#request.s" var="course">
                     <tbody>
-                     <td><s:property value="#course.id"/></td>
-                     <td><s:property value="#course.name"/></td>
+                     <td><s:property value="#course.courseId"/></td>
+                     <td><s:property value="#course.courseName"/></td>
+                     <td><s:property value="#course.period" /></td>
                      <td><s:property value="#course.state"/></td>
-                     <td><s:date name="#course.date" format="yyyy-MM-dd" /></td>
+                     
                      <td>
-                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findModal" onclick="getBookInfo(<s:property value="#course.ID"/>)" >点击查看</button>       
+                      <button type="button" class="btn btn-info btn-xs"  onclick="window.location.href='toCourseById.action?courseId=<s:property value='#course.courseId'/>'" >前往上课</button>
                     </td>                                              
                   </tbody>
                 </s:iterator>
@@ -113,8 +118,8 @@ String path = request.getContextPath();
                     01/04/2012
                   </td>
                   <td>
-                    <button type="button" class="btn btn-info btn-xs"  onclick="window.location.href='SaveCourseIdServiceI.action'">前往上课</button>
-                  </td>
+                       <button type="button" class="btn btn-info btn-xs"  onclick="window.location.href='course_inf_all.jsp'" >前往上课</button>
+                    </td>   
                 </tr>
                 <tr class="success">
                   <td>
@@ -127,8 +132,7 @@ String path = request.getContextPath();
                     01/04/2012
                   </td>
                   <td>
-                    Approved
-                  </td>
+                  ...                  </td>
                 </tr>
                 <tr class="error">
                   <td>
@@ -177,125 +181,13 @@ String path = request.getContextPath();
 
           </table>
         </div>
-      </div>
-    </div>
 
-          </div>
-        </div>
-        <!--  -->
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">通知信息</h3>
-          </div>
-          <div class="panel-body">
-            <div class="container" style="width: inherit;">
-              <div class="row clearfix">
-                <div class="col-md-12 column">
-                  <table id="data_list" class="table table-hover table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                      <tr>
-                        <th>
-                          ID
-                        </th>
-                        <th>
-                          通知
-                        </th>
-                        <th>
-                          时间
-                        </th>
-                        <th>
-                          状态
-                        </th>
-                      </tr>
-                    </thead>
-                    <s:if test="#request.pb.beanList!=null">
-                    <s:iterator value="#request.pb.beanList" var="notice">
-                    <tbody>
-                     <td><s:property value="#notice.id"/></td>
-                     <td><s:property value="#notice.name"/></td>
-                     <td><s:property value="#notice.state"/></td>
-                     <td><s:date name="#notice.date" format="yyyy-MM-dd" /></td>
-                     <td>
-                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findModal" onclick="getBookInfo(<s:property value="#notice.ID"/>)" >点击查看</button>       
-                    </td>                                              
-                  </tbody>
-                </s:iterator>
-              </s:if>
-              <s:else>
-              <tbody>
-                <tr>
-                  <td>
-                    1
-                  </td>
-                  <td>
-                    TB - Monthly
-                  </td>
-                  <td>
-                    01/04/2012
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#displayNotice" onclick="getBookInfo(<s:property value="#notice.ID"/>)" >点击查看</button>       
+  </div>
+</div>
+<!--  -->
 
-                  </td>
-                </tr>
-                <tr class="success">
-                  <td>
-                    1
-                  </td>
-                  <td>
-                    TB - Monthly
-                  </td>
-                  <td>
-                    01/04/2012
-                  </td>
-                  <td>
-                    Approved
-                  </td>
-                </tr>
-                <tr class="error">
-                  <td>
-                    2
-                  </td>
-                  <td>
-                    TB - Monthly
-                  </td>
-                  <td>
-                    02/04/2012
-                  </td>
-                  <td>
-                    Declined
-                  </td>
-                </tr>
-                <tr class="warning">
-                  <td>
-                    3
-                  </td>
-                  <td>
-                    TB - Monthly
-                  </td>
-                  <td>
-                    03/04/2012
-                  </td>
-                  <td>
-                    Pending
-                  </td>
-                </tr>
-                <tr class="info">
-                  <td>
-                    4
-                  </td>
-                  <td>
-                    TB - Monthly
-                  </td>
-                  <td>
-                    04/04/2012
-                  </td>
-                  <td>
-                    Call in to confirm
-                  </td>
-                </tr>
-              </tbody>
-            </s:else>
+
+</div>
 <!--------------------------------------查看的模糊框------------------------>  
               <form class="form-horizontal">   <!--保证样式水平不混乱-->   
                 <!-- 模态框（Modal） -->

@@ -38,7 +38,7 @@ public class TeachEvaluationAction extends ActionSupport {
 	private String sid;
 	private String e_class;
 	private String a1,a2,a3,a4,a5="0";
-	private String e_id;
+	/*private String e_id;*/
 	
    
 	public String getA1() {
@@ -83,13 +83,13 @@ public class TeachEvaluationAction extends ActionSupport {
 	public void setE_class(String e_class) {
 		this.e_class = e_class;
 	}
-	public String getE_id() {
+	/*public String getE_id() {
 		return e_id;
 	}
 	public void setE_id(String e_id) {
 		this.e_id = e_id;
 	}
-	
+	*/
 	@Resource(name="TeachEvaluationServiceI")
 	private TeachEvaluationServiceI teachEvaluationServiceI;
 	 @Action(value="TeachEvaluation",results={
@@ -100,13 +100,14 @@ public class TeachEvaluationAction extends ActionSupport {
 		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 		String str = format.format(new Date());
+		System.out.print(str);
 
 		Teachingevaluation TE=new Teachingevaluation();
 
 		Student stu=(Student) ActionContext.getContext().getSession().get("student");
 		sid=stu.getSId();
-                e_class=(String) ServletActionContext.getRequest().getSession().getAttribute("Eclass");
-
+        Object obj=ServletActionContext.getRequest().getSession().getAttribute("Eclass");
+        e_class=obj.toString();      
 		Student st=new Student();
 		st.setSId(sid);
 		TE.setStudent(st);

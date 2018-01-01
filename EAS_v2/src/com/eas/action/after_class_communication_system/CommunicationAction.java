@@ -83,13 +83,17 @@ public class CommunicationAction extends ActionSupport{
 		this.post=p;
 	}
 		@Action(value="loadPost",results={
-			@Result(name="success",location="/myPost.jsp"),
-			@Result(name="failure",location="/menu.jsp")})
+			@Result(name="success",location="/Posting.jsp"),
+			@Result(name="failure",location="/Posting.jsp")})
 	public String loadpost(){
 		try{
-			classId=(String)ServletActionContext.getRequest().getSession().getAttribute("classId");
+			Object obj=ServletActionContext.getRequest().getSession().getAttribute("Eclass");
+			classId=obj.toString(); 
+			//classId=(String)ServletActionContext.getRequest().getSession().getAttribute("classId");
+			System.out.print("classId"+classId);
 			postlist=postService.get_postlist(classId);
 			ServletActionContext.getRequest().setAttribute("postlist", postlist);
+			System.out.print(postlist);
 			return "success";
 		}catch(Exception exception){
 			exception.printStackTrace();
@@ -97,7 +101,9 @@ public class CommunicationAction extends ActionSupport{
 		return "failure";
 	}
 	
-	@Action(value="showPost")
+	@Action(value="showPost",results={
+			@Result(name="success",location="/reply.jsp"),
+			@Result(name="failure",location="/menu.jsp")})
 	public String showpost(){
 		try{
 			post=postService.find_post(poId);
@@ -111,12 +117,15 @@ public class CommunicationAction extends ActionSupport{
 		}catch(Exception exception){
 			exception.printStackTrace();
 		}
-		return null;
+		return "success";
 	}
 	
-	@Action(value="replyPost")
+	@Action(value="replyPost",results={
+			@Result(name="success",location="/Posting.jsp"),
+			@Result(name="failure",location="/error/400.jsp")})
 	public String replypost(){
 		try{
+			System.out.println("Ñ§Éúid:"+(String)ServletActionContext.getRequest().getSession().getAttribute("id"));
 			postService.insert_a_reply(poId,(String)ServletActionContext.getRequest().getSession().getAttribute("id"), content);
 			post=postService.find_post(poId);
 			replieslist=postService.get_replieslist(poId);
@@ -129,7 +138,7 @@ public class CommunicationAction extends ActionSupport{
 		}catch(Exception exception){
 			exception.printStackTrace();
 		}
-		return null;
+		return "success";
 	}
 	
 	@Action(value="agreePost",results={@Result(name="success",location="/showPost.jsp")})

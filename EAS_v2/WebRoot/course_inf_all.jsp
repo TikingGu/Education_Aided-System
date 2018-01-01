@@ -26,7 +26,6 @@
     <!-- 幻灯片-->
     <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 		<script src="${pageContext.request.contextPath}/js/ft-carousel.min.js" type="text/javascript" charset="utf-8"></script> 
-    
   </head>
   <div class="container">
     <div class="row clearfix">
@@ -36,9 +35,9 @@
           <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
             <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages<span class="badge">14</span></a></li>
+            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"  onclick="window.location.href='loadPost.action'">Messages<span class="badge">14</span></a></li>
             <li role="presentation"><a href="#download" aria-controls="download" role="tab" data-toggle="tab">Download</a></li>
-            <li role="presentation"><a href="#upload" aria-controls="upload" role="tab" data-toggle="tab" onclick="window.location.href='showPost.action'">Upload</a></li>
+            <li role="presentation"><a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">Upload</a></li>
           </ul>
           <!-- Tab panes -->
           <div class="tab-content">
@@ -137,9 +136,10 @@
             </div>
             
             <div role="tabpanel" class="tab-pane" id="messages">
+            <button onclick="window.location.href='loadPost.action'">加载帖子</button>
               <div class="row">
                 <div class="col-xs-12 col-md-12 eachCommentDiv" id="comment5695" show="true">
-                <s:iterator value="#request.">
+                <s:iterator value="#request.postlist" var='posting'>
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       <span class="smallword text-muted">
@@ -147,7 +147,7 @@
                       </span>
                       <span class="glyphicon glyphicon-question-sign"></span>
                       <span style="font-size:1.5em;font-weight:bold;">
-                        问题题目
+                        <s:property value="#posting.title"/>
 
                       </span>
                       <a href="#nowhere" id="5695" class="collpaseComment"><span class="glyphicon glyphicon-resize-small pull-right"></span></a>
@@ -158,7 +158,7 @@
                           <tr valign="top">
                             <td width="100px" style="padding-top:15px">
                               <span style="font-size:1.5em" class="glyphicon glyphicon-user"></span>
-                              <span>用户名 </span>
+                              <span><s:property value="#posting.student.stuName"/> </span>
                               <br>
                             </td>
                             <td align="left">
@@ -172,7 +172,7 @@
                                   </span>
                                 </a> 的提问
                               </div>
-                              <div class="eachCommentDescDivIfOnly">问题详细</div>
+                              <div class="eachCommentDescDivIfOnly"><s:property value="#posting.content"/> </div>
                               <br>
                               <br>
                             </td>
@@ -214,6 +214,7 @@
                       <hr style="width:100%" align="left">
                     </div>
                   </div>
+                  </s:iterator>
                 </div>
               </div>
               

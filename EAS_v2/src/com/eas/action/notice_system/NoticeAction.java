@@ -1,5 +1,6 @@
 package com.eas.action.notice_system;
 
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.eas.model.Announcement;
@@ -35,11 +36,15 @@ public class NoticeAction extends ActionSupport {
 		ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
 		//从容器接管bean
 		NoticeImp Notice=(NoticeImp)context.getBean("notice");
+		
+		Object obj=ServletActionContext.getRequest().getSession().getAttribute("Eclass");
+		classId=obj.toString();
+		
 		System.out.println(classId);
 		Announcement announce =new Announcement();
 		announce.setTitle(title);
 		announce.setContent(content);
-		announce.setClassid(classId);
+		//announce.setClassid(classId);
 		boolean is=Notice.AddNotice(announce);
 		if(is){
 			return SUCCESS;
