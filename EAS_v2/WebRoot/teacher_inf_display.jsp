@@ -32,6 +32,8 @@ String path = request.getContextPath();
     <![endif]-->
     <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
   	<script src="js/lizhiliang.js"></script>
+   <script src="${pageContext.request.contextPath}/jQuery/jquery-3.1.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -50,7 +52,7 @@ String path = request.getContextPath();
         			</div>
         			<div class="panel-body">
         				欢迎：用户名 老师
-        				<a class="btn btn-xs btn-default pull-right edit-profile" href="course_evaTeach_display"> 查看评教情况 </a>
+        				<a class="btn btn-xs btn-default pull-right edit-profile" href="course_evaTeach_display.jsp"> 查看评教情况 </a>
         			</div>
         		</div>
 			</div>
@@ -60,18 +62,122 @@ String path = request.getContextPath();
 					<div class="panel-heading">
 						<h3 class="panel-title"> 课程 </h3>
 					</div>
-					<s:iterator value="" var="course">
-						<ul class="list-group">
-							<a class="list-group-item" href="<%=path%>/pages/course_homework_inf.jsp">
-								<b>课程名</b>
-								<div class="skillbar clearfix pull-right" data-percent="99%">
-									<li class="skillbar-bar li" style="background: #3498db;"></li>
-									<li class="skillbar-title li">授课进度</li>
-									<li class="skill-bar-percent li">25%</li>
-								</div> <!-- End Skill Bar -->
-							</a>
-						</ul>
-					</s:iterator>
+					<div class="panel-body">
+
+            <div class="container" style="width: inherit;">
+              <div class="row clearfix">
+                <div class="col-md-12 column">
+                  <table id="data_list" class="table table-hover table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                      <tr>
+                        <th>
+                          ID
+                        </th>
+                        <th>
+                          课程
+                        </th>
+                        <th>
+                          学分
+                        </th>
+                        <th>
+                          状态
+                        </th>
+                      </tr>
+                    </thead>
+                    <s:if test="#request.pb.beanList!=null">
+                    <s:iterator value="#request.pb.beanList" var="course">
+                    <tbody>
+                     <td><s:property value="#course.id"/></td>
+                     <td><s:property value="#course.name"/></td>
+                     <td><s:property value="#course.state"/></td>
+                     <td><s:date name="#course.date" format="yyyy-MM-dd" /></td>
+                     <td>
+                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#findModal" onclick="getBookInfo(<s:property value="#course.ID"/>)" >点击查看</button>       
+                    </td>                                              
+                  </tbody>
+                </s:iterator>
+              </s:if>
+              <s:else>
+              <tbody>
+                <tr>
+                  <td>
+                    1
+                  </td>
+                  <td>
+                    TB - Monthly
+                  </td>
+                  <td>
+                    01/04/2012
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-info btn-xs"  onclick="window.location.href='teacher_coursde_display.jsp'">查看</button>
+                  </td>
+                </tr>
+                <tr class="success">
+                  <td>
+                    1
+                  </td>
+                  <td>
+                    TB - Monthly
+                  </td>
+                  <td>
+                    01/04/2012
+                  </td>
+                  <td>
+                    Approved
+                  </td>
+                </tr>
+                <tr class="error">
+                  <td>
+                    2
+                  </td>
+                  <td>
+                    TB - Monthly
+                  </td>
+                  <td>
+                    02/04/2012
+                  </td>
+                  <td>
+                    Declined
+                  </td>
+                </tr>
+                <tr class="warning">
+                  <td>
+                    3
+                  </td>
+                  <td>
+                    TB - Monthly
+                  </td>
+                  <td>
+                    03/04/2012
+                  </td>
+                  <td>
+                    Pending
+                  </td>
+                </tr>
+                <tr class="info">
+                  <td>
+                    4
+                  </td>
+                  <td>
+                    TB - Monthly
+                  </td>
+                  <td>
+                    04/04/2012
+                  </td>
+                  <td>
+                    Call in to confirm
+                  </td>
+                </tr>
+              </tbody>
+            </s:else>
+
+          </table>
+        </div>
+      </div>
+    </div>
+
+          </div>
 				</div>
 			</div>
         </div>

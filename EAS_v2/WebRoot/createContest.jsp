@@ -21,26 +21,13 @@ String path = request.getContextPath();
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-admin-theme.css">
         
-        <script language="javascript">
-            function c()
-            {
-                if(document.formAdd.timuName.value=="")
-                {
-                    alert("请输入题目名称");
-                    return false;
-                }
-                document.formAdd.submit();
-            }
-        </script>
 	</head>
 
 	<body leftmargin="2" topmargin="9" background='<%=path %>/img/allbg.gif'>
 	<div class="col-md-2 bootstrap-admin-col-left">
-            <ul class="nav navbar-collapse collapse bootstrap-admin-navbar-side">
-                <li class="active">
-                    <a href="back_to_XXXPage.action"><i class="glyphicon glyphicon-chevron-left"></i> 返回</a>
-                </li>
-            </ul>
+            
+                <button type="button" class="btn btn-primary" onclick="window.location.href='teacher_coursde_display.jsp'">返回</button>
+            
         </div>
 		<div class="row">
                     <div class="col-lg-12">
@@ -49,19 +36,28 @@ String path = request.getContextPath();
                                 <div class="text-muted bootstrap-admin-box-title">创建题目</div>
                             </div>
                             <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
-                                <form class="form-horizontal" action="/EAS_v2/bookAction_createBook.action" method="post">
-                                    <div class="col-lg-5 form-group">
+                                <form class="form-horizontal" action="insertQuiz.action" method="post">
+                                <div class="col-lg-7 form-group">
+                                        <label class="col-lg-4 control-label" for="create_bno">测验名称</label>
+                                        <div class="col-lg-8">
+                                            <input class="form-control" id="questionTitle" name="quizname" type="text" value="">
+                                            <label class="control-label" for="create_bno" style="display: none;"></label>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="col-lg-5 form-group">                               
                                         <label class="col-lg-4 control-label" for="create_bno">题目名称</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="bookId" name="ISBN" type="text" value="">
+                                            <input class="form-control" id="questionTitle" name="questions[0].questionTitle" type="text" value="">
                                             <label class="control-label" for="create_bno" style="display: none;"></label>
                                         </div>
                                     </div>
                                   
-                                    <div class="col-lg-5 form-group">
+                                    <div class="col-lg-7 form-group">
                                         <label class="col-lg-4 control-label" for="create_bname">选项A：</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="bookName" name="bookName" type="text" value="">
+                                            <input class="form-control" id="bookName" name="questions[0].option1" type="text" value="">
                                             <label class="control-label" for="create_bname" style="display: none;"></label>
                                         </div>
                                     </div>
@@ -69,15 +65,15 @@ String path = request.getContextPath();
                                     <div class="col-lg-5 form-group">
                                         <label class="col-lg-4 control-label" for="create_bname">选项B：</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="bookName" name="bookName" type="text" value="">
+                                            <input class="form-control" id="bookName" name="questions[0].option2" type="text" value="">
                                             <label class="control-label" for="create_bname" style="display: none;"></label>
                                         </div>
                                     </div>
                                     
-                                  <div class="col-lg-5 form-group">
+                                  <div class="col-lg-7 form-group">
                                         <label class="col-lg-4 control-label" for="create_bname2">选项C：</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="autho" name="autho" type="text" value="">
+                                            <input class="form-control" id="autho" name="questions[0].option3" type="text" value="">
                                             <label class="control-label" for="create_bname2" style="display: none;"></label>
                                         </div>
                                     </div>
@@ -85,7 +81,7 @@ String path = request.getContextPath();
                                      <div class="col-lg-5 form-group">
                                         <label class="col-lg-4 control-label" for="create_bname3">选项D：</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="press" name="press" type="text" value="">
+                                            <input class="form-control" id="question.option4" name="questions[0].option4" type="text" value="">
                                             <label class="control-label" for="create_bname2" style="display: none;"></label>
                                         </div>
                                     </div>
@@ -95,28 +91,27 @@ String path = request.getContextPath();
 		                                     <div class="col-lg-8">
 		                                     		<div class="col-lg-9">
 		                                            <label  control-label" for="create_bname3">选项A：</label>
-		                                           <input  id="press" name="press" type="radio" value=""> <br/>
+		                                           <input  id="press" name="questions[0].answer" type="radio" value="A"> <br/>
 		                                           </div>
 		                                            <div class="col-lg-9">
 		                                            <label  control-label" for="create_bname3">选项B：</label>
-		                                           <input  id="press" name="press" type="radio" value=""> <br/>
+		                                           <input  cid="press" name="questions[0].answer" type="radio" value="B"> <br/>
 		                                           </div>
 		                                            <div class="col-lg-9">
 		                                            <label  control-label" for="create_bname3">选项C：</label>
-		                                           <input  id="press" name="press" type="radio" value=""> <br/>
+		                                           <input  id="press" name="questions[0].answer" type="radio" value="C"> <br/>
 		                                           </div>
 													<div class="col-lg-9">
 		                                            <label  control-label" for="create_bname3">选项D：</label>
-		                                           <input  id="press" name="press" type="radio" value=""> <br/>
+		                                           <input  id="press" name="questions[0].answer" type="radio" value="D"> <br/>
 		                                           </div>
 		                                     </div>
 	                                      </div>
                                       </div>
                                      <div class="col-lg-5 form-group">
-                                        <label class="col-lg-4 control-label" for="create_bname3">题目分值</label>
+                                        <label class="col-lg-4 control-label" for="create_bname3">小测分值</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" id="press" name="press" type="text" value="">
-                                            <label class="control-label" for="create_bname2" style="display: none;"></label>
+                                            <input class="form-control" id="press" name="points" type="text" value="">                     
                                         </div>
                                     </div>
                                   

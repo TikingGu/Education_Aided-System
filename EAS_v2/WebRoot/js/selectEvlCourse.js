@@ -9,42 +9,42 @@ $(function() {
 
 
 });
-
+/*
 $(document).ready(function(){
     //解决file的change事件只能执行一次的问题
-	window.alert('ajax');
+	
 	$.ajax({
         method: 'POST',
         url: 'RFTeacherevaluationaction.action',
         params: null,
         type: "json",
         callback: function(data) {
-            showInfo('success');
+            windows.alert('success');
            
     }
 }
 );
 });
-
+*/
 
 
 function saveCourseId(id) {
-    ajax({
-            method: 'POST',
-            url: 'saveCourseId.action',
-            params: "borrowId=" + id,
-            type: "json",
+    $.ajax({
+            method: 'GET',
+            url: 'SavaCourseIdAction.action?courseId=' + id,
+      
             callback: function(data) {
-                showInfo('success');
+                window.alert('success');
                
         }
     }
     );
 }
-function saveCourseId(id) {
-    ajax({
+
+function saveEvl() {
+    $.ajax({
             method: 'POST',
-            url: 'saveCourseId.action',
+            url: 'TeachEvaluation.action',
             params: "borrowId=" + id,
             type: "json",
             callback: function(data) {

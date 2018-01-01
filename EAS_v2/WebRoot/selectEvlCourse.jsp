@@ -30,6 +30,8 @@ String path = request.getContextPath();
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/icheck.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/selectEvlCourse.js"></script>
+    
+   
     </head>
 
 <body>
@@ -44,7 +46,7 @@ String path = request.getContextPath();
             <h3 class="panel-title">
               个人信息
               <a class="btn btn-xs btn-default pull-right edit-profile" href="修改密码界面 我找不到命名">修改</a>
-              <a class="btn btn-xs btn-default pull-right edit-profile" href="注销action">注销</a>
+              <a class="btn btn-xs btn-default pull-right edit-profile" href="RFTeacherevaluationaction.action">注销</a>
             </h3>
           </div>
           <div class="panel-body">
@@ -56,7 +58,7 @@ String path = request.getContextPath();
             <p class="realname" title="&nbsp;">&nbsp; </p>
             <p class="username" title="username">用户名 <s:property value="#session.student.stuName"/></p>
             <p class="username"> 学号 <s:property value="#session.student.SID"/></p>
-            <a class="pull-right" href="selectEvlCourse.jsp"> 开始评教 </a>
+            <a class="pull-right" href="student_inf_display.jsp"> 结束评教 </a>
           </div>
         </div>
       </div>
@@ -81,25 +83,29 @@ String path = request.getContextPath();
                           课程
                         </th>
                         <th>
-                          学分
+                          学期
                         </th>
                         <th>
                           状态
                         </th>
                       </tr>
                     </thead>
-                    <s:if test="#request.s!=null">
-                    <scripts>
-                    window.altert(#request.s)
-                    </scripts>
+                    
+                    <s:if test="#request!=null">
                     <s:iterator value="#request.s" var="course">
                     <tbody>
                      <td><s:property value="#course.courseId"/></td>
                      <td><s:property value="#course.courseName"/></td>
+                     <td><s:property value="#course.period" /></td>
                      <td><s:property value="#course.state"/></td>
-                     <td><s:date name="#course.period" /></td>
+                     
+                     
+                    
+                   
+					                    
+                    
                      <td>
-                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal" onclick="saveCourseId(<s:property value="#course.id"/>)" >进行评教</button>
+                      <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#BeginEvl" onclick="saveCourseId(<s:property value="#course.courseId"/>)" >进行评教</button>
                     </td>                                              
                   </tbody>
                 </s:iterator>
@@ -117,7 +123,7 @@ String path = request.getContextPath();
                     01/04/2012
                   </td>
                   <td>
-                       <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#BeginEvl" onclick="saveCourseId(<s:property value="#course.id"/>)" >进行评教</button>
+                       <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#BeginEvl" onclick="SavaCourseIdAction.action?<s:property value="#course.id"/>" >进行评教</button>
                     </td>   
                 </tr>
                 <tr class="success">
@@ -195,7 +201,7 @@ String path = request.getContextPath();
 
 
  <!--------------------------------------查看的模糊框------------------------>  
-                                 <form class="form-horizontal">   <!--保证样式水平不混乱-->   
+                                 <form class="form-horizontal" href="TeachEvaluation.action">   <!--保证样式水平不混乱-->   
                                         <!-- 模态框（Modal） -->
                   <div class="modal fade" id="BeginEvl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -215,62 +221,62 @@ String path = request.getContextPath();
                       <label for="firstname" class="col-sm-3 control-label">课堂氛围</label>
                         <div class="col-sm-7">
                           <label class="radio-inline">
-							  <input type="radio" name="a1" id="inlineRadio11" value="option1"> 1
+							  <input type="radio" name="a1" id="inlineRadio11" value="优"> 1
 							</label>
 							<label class="radio-inline">
-							  <input type="radio" name="a1" id="inlineRadio12" value="option2"> 2
+							  <input type="radio" name="a1" id="inlineRadio12" value="良"> 2
 							</label>
 							<label class="radio-inline">
-							  <input type="radio" name="a1" id="inlineRadio13" value="option3"> 3
+							  <input type="radio" name="a1" id="inlineRadio13" value="中"> 3
 							</label>
 							<label class="radio-inline">
-							  <input type="radio" name="a1" id="inlineRadio14" value="option3"> 4
+							  <input type="radio" name="a1" id="inlineRadio14" value="差"> 4
 							</label>
                         </div>
                     
                       <label for="firstname" class="col-sm-3 control-label">课堂氛围</label>
                     <div class="col-sm-7">
                           <label class="radio-inline">
-							  <input type="radio" name="a2" id="inlineRadio21" value="option1"> 1
+							  <input type="radio" name="a2" id="inlineRadio21" value="优"> 1
 							</label>
 							<label class="radio-inline">
-							  <input type="radio" name="a2" id="inlineRadio22" value="option2"> 2
+							  <input type="radio" name="a2" id="inlineRadio22" value="良"> 2
 							</label>
 							<label class="radio-inline">
-							  <input type="radio" name="a2" id="inlineRadio23" value="option3"> 3
+							  <input type="radio" name="a2" id="inlineRadio23" value="中"> 3
 							</label>
 							<label class="radio-inline">
-							  <input type="radio" name="a2" id="inlineRadio24" value="option3"> 4
+							  <input type="radio" name="a2" id="inlineRadio24" value="差"> 4
 							</label>
                         </div>
                       <label for="firstname" class="col-sm-3 control-label">课堂氛围</label>
                    <div class="col-sm-7">
                           <label class="radio-inline">
-							  <input type="radio" name="a3" id="inlineRadio1" value="option1"> 1
+							  <input type="radio" name="a3" id="inlineRadio1" value="优"> 1
 							</label>
 							<label class="radio-inline">
-							  <input type="radio" name="a3" id="inlineRadio2" value="option2"> 2
+							  <input type="radio" name="a3" id="inlineRadio2" value="良"> 2
 							</label>
 							<label class="radio-inline">
-							  <input type="radio" name="a3" id="inlineRadio3" value="option3"> 3
+							  <input type="radio" name="a3" id="inlineRadio3" value="中"> 3
 							</label>
 							<label class="radio-inline">
-							  <input type="radio" name="a3" id="inlineRadio3" value="option3"> 4
+							  <input type="radio" name="a3" id="inlineRadio3" value="差"> 4
 							</label>
                         </div>
                         <label for="firstname" class="col-sm-3 control-label">课堂氛围</label>
                     <div class="col-sm-7">
                           <label class="radio-inline">
-							  <input type="radio" name="a4" id="inlineRadio1" value="option1"> 1
+							  <input type="radio" name="a4" id="inlineRadio1" value="优"> 1
 							</label>
 							<label class="radio-inline">
-							  <input type="radio" name="a4" id="inlineRadio2" value="option2"> 2
+							  <input type="radio" name="a4" id="inlineRadio2" value="良"> 2
 							</label>
 							<label class="radio-inline">
-							  <input type="radio" name="a4" id="inlineRadio3" value="option3"> 3
+							  <input type="radio" name="a4" id="inlineRadio3" value="中"> 3
 							</label>
 							<label class="radio-inline">
-							  <input type="radio" name="a4" id="inlineRadio3" value="option3"> 4
+							  <input type="radio" name="a4" id="inlineRadio3" value="差"> 4
 							</label>
                         </div>
                     
@@ -279,7 +285,7 @@ String path = request.getContextPath();
                     <!---------------------表单-------------------->
                   </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="saveEvl()">提交
+                          <button type="submit" class="btn btn-default">提交
                           </button>
                         </div>
                       </div><!-- /.modal-content -->

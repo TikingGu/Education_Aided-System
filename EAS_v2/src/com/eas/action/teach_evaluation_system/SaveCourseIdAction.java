@@ -35,6 +35,7 @@ public class SaveCourseIdAction extends ActionSupport{
 	   		@Result(name="success",location="/TeachEvaluationSuccess.jsp")}*/)
 	public String execute(){
 		ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("/applicationContext.xml");//加载Spring配置文件，初始化IOC容器
+		
 		List<String> eclass=saveCourseIdServiceI.findClassIdby(courseId);
 		ServletActionContext.getRequest().getSession().setAttribute("Eclass", eclass);
 		System.out.print(eclass);

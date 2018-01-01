@@ -38,7 +38,7 @@
             <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
             <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages<span class="badge">14</span></a></li>
             <li role="presentation"><a href="#download" aria-controls="download" role="tab" data-toggle="tab">Download</a></li>
-            <li role="presentation"><a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">Upload</a></li>
+            <li role="presentation"><a href="#upload" aria-controls="upload" role="tab" data-toggle="tab" onclick="window.location.href='showPost.action'">Upload</a></li>
           </ul>
           <!-- Tab panes -->
           <div class="tab-content">
@@ -139,6 +139,7 @@
             <div role="tabpanel" class="tab-pane" id="messages">
               <div class="row">
                 <div class="col-xs-12 col-md-12 eachCommentDiv" id="comment5695" show="true">
+                <s:iterator value="#request.">
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       <span class="smallword text-muted">
@@ -327,7 +328,7 @@
                       60%
                     </div>
                   </div> 
-                  <button type="button" class="btn btn-info btn-lg"data-toggle="modal" data-target="#beginSign" >按钮</button>
+                  <button type="button" class="btn btn-info btn-lg"data-toggle="modal" data-target="#beginSign" onclick="window.location.href='display.jsp'" >点击开始上课</button>
                 </div>
               </div>
             </div>

@@ -37,7 +37,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class TeachEvaluationAction extends ActionSupport {
 	private String sid;
 	private String e_class;
-	private String a1,a2,a3,a4,a5;
+	private String a1,a2,a3,a4,a5="0";
 	private String e_id;
 	
    

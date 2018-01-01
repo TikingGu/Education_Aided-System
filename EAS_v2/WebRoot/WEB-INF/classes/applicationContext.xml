@@ -51,4 +51,6 @@
   <bean id="test" class="com.eas.model.Test"></bean>
   <bean id="question" class="com.eas.model.Question"></bean>
   <bean id="sheet" class="com.eas.model.Sheet"></bean>
+  <bean id="posting" class="com.eas.model.Posting"></bean>
+  <bean id="replies" class="com.eas.model.Replies"></bean>
 </beans>

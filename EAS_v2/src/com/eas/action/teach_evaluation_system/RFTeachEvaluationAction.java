@@ -33,13 +33,17 @@ public class RFTeachEvaluationAction extends ActionSupport {
 	private RFTeachEvaluationServiceI rFTeachEvaluationServiceI;
 	@Action(value="RFTeacherevaluationaction"
 			,results={
-   		@Result(name="success",location="/TeachEvaluationSuccess.jsp")})
+   		@Result(name="success",location="/selectEvlCourse.jsp")})
 	public String execute(){
 		ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("/applicationContext.xml");//加载Spring配置文件，初始化IOC容器
 		Student stu=(Student) ActionContext.getContext().getSession().get("student");
 		sid=stu.getSId();
 		List<Course> s=rFTeachEvaluationServiceI.findCourseInfby(sid);
 		HttpServletResponse response=ServletActionContext.getResponse();
+		if(s==null) {
+			System.out.print("null");
+		}else {
+		System.out.print(s);}
 		ServletActionContext.getRequest().setAttribute("s", s);
  		return SUCCESS;
 	}

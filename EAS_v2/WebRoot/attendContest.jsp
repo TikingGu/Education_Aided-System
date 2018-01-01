@@ -23,68 +23,87 @@ String path = request.getContextPath();
         <script type='text/javascript' src='<%=path %>/dwr/interface/daojishiService.js'></script>
 		<script type='text/javascript' src='<%=path %>/dwr/engine.js'></script>
 		<script type='text/javascript' src='<%=path %>/dwr/util.js'></script>
-		
-       <script type="text/javascript">
-	   function init()
-	   {
-	         
-	   }
-	   
-	   
-	   
-	</script>
+		<script src="${pageContext.request.contextPath}/jQuery/jquery-3.1.1.min.js"></script>
+      <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+
 	</head>
 
-<body onload="init()">
-<div class="container">
-	<div class="row">
-    	<div class="col-lg-12">
-        	<div class="panel panel-default bootstrap-admin-no-table-panel">
-            	<div class="panel-heading">
-                	<div class="text-muted bootstrap-admin-box-title">课堂小测验</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-12">
-       	  <form action="<%=path %>/test_jiaojuan.action" name="form1" method="post">		
-			<div class="col-lg-12">
-            	<label>
-						${test.QuestionTitle }
-						(
-						  单选题${test.Score }分
-						)
-			  	</label>
-				<div class="radio">
-					<label>
-						A:<input type="radio" name="option1" id="option1" value="A">${test.option1}
-					</label>
-				</div>
-                <div class="radio">
-					<label>
-						B:<input type="radio" name="option2" id="option2" value="B">${test.option2}
-					</label>
-				</div>
-                <div class="radio">
-					<label>
-						C:<input type="radio" name="option3" id="option3" value="C">${test.option3}
-					</label>
-				</div>
-                <div class="radio">
-					<label>
-						D:<input type="radio" name="option4" id="option4" value="D">${test.option4}
-					</label>
-				</div>
-                <div class="col-lg-12">
-                	<hr />
-                </div>
-		  </form>
-        </div>
-        <div class="panel-footer">
-        	<div class="col-lg-2">
-            	<button type="submit" class="btn btn-primary">交卷</button>
-        	</div>
-         </div>
-    </div>
-</div>
+<body>
+
+<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#attendContest" onclick=savaClassId("666") >进行测试</button>
+<script>
+
+function savaClassId(id) {
+	 window.location.href="SavaCourseIdAction.action?courseId="+id;
+}
+
+</script>
+
+
+
+
+
+
+
+ <!--------------------------------------查看的模糊框------------------------>  
+                                 <form class="form-horizontal">   <!--保证样式水平不混乱-->   
+                                        <!-- 模态框（Modal） -->
+             
+                  <div class="modal fade" id="attendContest" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                          </button>
+                          <h4 class="modal-title" id="myModalLabel">
+                            进行测试
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                        
+                    <!---------------------表单-------------------->
+                     <div class="form-group">
+                     
+                     <s:iterator value="#request.questionList" var="question" status="status">
+                      <label for="firstname" class="col-sm-3 control-label"><s:property value="#question.questionTitle"/></label>
+                        <div class="col-sm-7">
+                          <label class="radio-inline">
+							  <input type="radio" name="<s:property value="#status.index"/>" id="inlineRadio11" value="option1"> <s:property value="#question.option1"/>
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="question[<s:property value="#status.index"/>].answer" id="inlineRadio12" value="option2"> <s:property value="#question.option1"/>
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="question[<s:property value="#status.index"/>].answer" id="inlineRadio13" value="option3"> <s:property value="#question.option1"/>
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="question[<s:property value="#status.index"/>].answer" id="inlineRadio14" value="option3"> <s:property value="#question.option1"/>
+							</label>
+                        </div>
+                    </s:iterator>
+                
+                    
+                    
+                    
+                    <!---------------------表单-------------------->
+                  </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="saveEvl()">提交
+                          </button>
+                        </div>
+                      </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                  </div>
+
+                                 </form>  
+
+
+
+
+
+
+
+
 </body>
 </html>

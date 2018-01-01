@@ -28,7 +28,7 @@ public class InsertQuizAction extends ActionSupport{
 //	private Question question=new Question();
 	private List<Question> questions=new ArrayList<Question>();
 	private String quizname;
-	private String classid;
+	private String classid="02";
 	private float points;
 	private Integer quizid;
 	private String sid;
@@ -82,7 +82,7 @@ public class InsertQuizAction extends ActionSupport{
 		this.quizresult=q;
 	}
 	@Action(value="insertQuiz",results={
-			@Result(name="success",location="/insertQuizSuccess.jsp"),
+			@Result(name="success",location="/teacher_coursde_display.jsp"),
 			@Result(name="failure",location="/insertQuizFailure.jsp")})
 	public String execute(){
 		try{

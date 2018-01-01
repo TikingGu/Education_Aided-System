@@ -26,7 +26,8 @@ String path = request.getContextPath();
   <!-- jQuery.js -->
   <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
   <script src="js/lizhiliang.js"></script>
-
+   <script src="${pageContext.request.contextPath}/jQuery/jquery-3.1.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -53,7 +54,7 @@ String path = request.getContextPath();
             <p class="realname" title="&nbsp;">&nbsp; </p>
             <p class="username" title="username">用户名 <s:property value="#session.student.stuName"/></p>
             <p class="username"> 学号 <s:property value="#session.student.SID"/></p>
-            <a class="pull-right" href="selectEvlCourse.jsp"> 开始评教 </a>
+            <a class="pull-right" href='RFTeacherevaluationaction.action'> 开始评教 </a>
           </div>
         </div>
       </div>
@@ -112,7 +113,7 @@ String path = request.getContextPath();
                     01/04/2012
                   </td>
                   <td>
-                    <button type="button" class="btn btn-info btn-xs"  onclick="window.location.href='course_inf_all.jsp'">前往上课</button>
+                    <button type="button" class="btn btn-info btn-xs"  onclick="window.location.href='SaveCourseIdServiceI.action'">前往上课</button>
                   </td>
                 </tr>
                 <tr class="success">
@@ -233,7 +234,8 @@ String path = request.getContextPath();
                     01/04/2012
                   </td>
                   <td>
-                    Default
+                    <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#displayNotice" onclick="getBookInfo(<s:property value="#notice.ID"/>)" >点击查看</button>       
+
                   </td>
                 </tr>
                 <tr class="success">
@@ -294,7 +296,48 @@ String path = request.getContextPath();
                 </tr>
               </tbody>
             </s:else>
+<!--------------------------------------查看的模糊框------------------------>  
+              <form class="form-horizontal">   <!--保证样式水平不混乱-->   
+                <!-- 模态框（Modal） -->
+                <div class="modal fade" id="displayNotice" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                          &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                          作业评价
+                        </h4>
+                      </div>
+                      <div class="modal-body">
 
+                        <!---------------------表单-------------------->
+                        <div class="form-group">
+                          <div class="contain">
+
+                            <div class="col-md-12">
+                              <span class="input-group-addon" id="basic-addon1">标题</span>
+                              
+                            </div>
+
+                            <div class="col-md-12">
+
+                              <br/>
+                              <p> 内容</p>
+                            </div>
+                          </div>
+                        </div>
+                        <!---------------------表单尾-------------------->
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="saveEvl()">提交
+                        </button>
+                      </div>
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal -->
+                </div>
+              </form>
           </table>
           
                     <s:if test="#request.pb!=null">
