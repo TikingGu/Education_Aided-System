@@ -76,7 +76,7 @@ public class Posting implements java.io.Serializable {
 		this.poId = poId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "Po_Student", nullable = false)
 	public Student getStudent() {
 		return this.student;
