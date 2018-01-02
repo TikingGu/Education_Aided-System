@@ -334,12 +334,42 @@ public class HibernateDAO {
 			destory();
 			}
 	}
-        /*根据courseid查出classid*/
-	public List<String> findClassIdby(String courseId){
+       /*根据sid查出classid*/
+	public List<String> findClassIdby(String sid){
 		try{
 			init();
-			String hql="select cf.classId from Classinfo as cf where cf.course.courseId=?)";
-			List<String> c=session.createQuery(hql).setParameter(0,courseId).list();
+			String hql="select cf.classid from StuClass as sc where sc.sid=?";
+			List<String> c=session.createQuery(hql).setParameter(0,sid).list();
+			return c;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			transaction.commit();
+			destory();
+		}
+		return null;
+	}
+public List<String> ShowStudentsSign(){
+		try{
+			init();
+			String hql="from Sign as s";
+			List<String> c=session.createQuery(hql).list();
+			return c;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			transaction.commit();
+			destory();
+		}
+		return null;
+	}
+	public List<String> DeleteStudentsSign(){
+		try{
+			init();
+			String hql="Delete from Sign as s";
+			List<String> c=session.createQuery(hql).list();
 			return c;
 		}catch(Exception e){
 			e.printStackTrace();

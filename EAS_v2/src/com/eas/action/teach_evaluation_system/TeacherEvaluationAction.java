@@ -1,4 +1,4 @@
-package com.eas.action.teach_evaluation_system;
+﻿package com.eas.action.teach_evaluation_system;
 
 import java.io.IOException;
 import java.text.NumberFormat;
@@ -129,12 +129,7 @@ public class TeacherEvaluationAction extends ActionSupport{
 		System.out.print(nt.format(A3));
 		System.out.print(nt.format(A4));*/
 		HttpServletResponse response=ServletActionContext.getResponse();
-		try {
-			response.getWriter().print(p);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ServletActionContext.getRequest().setAttribute("p", p);
 		return SUCCESS;
 }
 }
