@@ -19,7 +19,7 @@ import javax.persistence.Table;
  * Posting entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "posting", catalog = "eas36")
+@Table(name = "posting", catalog = "eas")
 public class Posting implements java.io.Serializable {
 
 	// Fields
@@ -78,7 +78,7 @@ public class Posting implements java.io.Serializable {
 		this.poId = poId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "Po_Student", nullable = false)
 	public Student getStudent() {
 		return this.student;

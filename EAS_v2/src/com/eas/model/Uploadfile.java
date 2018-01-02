@@ -15,7 +15,7 @@ import javax.persistence.Table;
  * Uploadfile entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "uploadfile", catalog = "eas36")
+@Table(name = "uploadfile", catalog = "eas")
 public class Uploadfile implements java.io.Serializable {
 
 	// Fields

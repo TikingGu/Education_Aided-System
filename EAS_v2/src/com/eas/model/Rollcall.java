@@ -11,7 +11,7 @@ import javax.persistence.Table;
  * Rollcall entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "rollcall", catalog = "eas36")
+@Table(name = "rollcall", catalog = "eas")
 public class Rollcall implements java.io.Serializable {
 
 	// Fields

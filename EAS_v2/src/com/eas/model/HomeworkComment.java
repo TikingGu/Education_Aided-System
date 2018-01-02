@@ -12,7 +12,7 @@ import javax.persistence.Table;
  * HomeworkComment entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "homework_comment", catalog = "eas36")
+@Table(name = "homework_comment", catalog = "eas")
 public class HomeworkComment implements java.io.Serializable {
 
 	// Fields

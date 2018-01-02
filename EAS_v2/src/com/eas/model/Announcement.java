@@ -11,7 +11,7 @@ import javax.persistence.Table;
  * Announcement entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "announcement", catalog = "eas36")
+@Table(name = "announcement", catalog = "eas")
 public class Announcement implements java.io.Serializable {
 
 	// Fields

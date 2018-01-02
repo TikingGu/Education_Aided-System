@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * Question entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "question", catalog = "eas36")
+@Table(name = "question", catalog = "eas")
 public class Question implements java.io.Serializable {
 
 	// Fields
@@ -65,7 +65,7 @@ public class Question implements java.io.Serializable {
 		this.questionId = questionId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "testid", nullable = false)
 	public Test getTest() {
 		return this.test;

@@ -53,4 +53,5 @@
   <bean id="sheet" class="com.eas.model.Sheet"></bean>
   <bean id="posting" class="com.eas.model.Posting"></bean>
   <bean id="replies" class="com.eas.model.Replies"></bean>
+  <bean id="comment" class="com.eas.model.Comment"></bean>
 </beans>

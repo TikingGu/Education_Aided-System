@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * Sheet entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "sheet", catalog = "eas36")
+@Table(name = "sheet", catalog = "eas")
 public class Sheet implements java.io.Serializable {
 
 	// Fields
@@ -56,7 +56,7 @@ public class Sheet implements java.io.Serializable {
 		this.sheetId = sheetId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "testid", nullable = false)
 	public Test getTest() {
 		return this.test;
