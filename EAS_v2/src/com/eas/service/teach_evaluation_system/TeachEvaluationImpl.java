@@ -2,6 +2,7 @@ package com.eas.service.teach_evaluation_system;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eas.dao.after_class_communication_system.PostDAO;
@@ -11,7 +12,6 @@ import com.eas.model.Classinfo;
 import com.eas.model.Student;
 
 
-
 @Service("TeachEvaluationServiceI")
 public class TeachEvaluationImpl implements TeachEvaluationServiceI{
 	@Resource(name="TeachEvaluationDAO")
@@ -19,14 +19,14 @@ public class TeachEvaluationImpl implements TeachEvaluationServiceI{
 	public void add(Object object){
 		teachEvaluationDAO.add(object);
 	}
-        @Resource(name="PostDAO")
-	private PostDAO postDAO;
+	@Autowired
+	private PostDAO postdao;
 	public Student find_student(String sid){
-		return postDAO.find_student(sid);
+		return postdao.find_student(sid);
 	}
-	@Resource(name="TestDAO")
-	private TestDAO testDAO;
+	@Resource(name="testdao")
+	private TestDAO testdao;
 	public Classinfo find_classinfo(String classid){
-		return testDAO.find_classinfo(classid);
+		return testdao.find_classinfo(classid);
 	}
 }
