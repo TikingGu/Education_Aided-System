@@ -106,14 +106,13 @@ public class TeachEvaluationAction extends ActionSupport {
 
 		Student stu=(Student) ActionContext.getContext().getSession().get("student");
 		sid=stu.getSId();
-        Object obj=ServletActionContext.getRequest().getSession().getAttribute("Eclass");
-        e_class=obj.toString();      
-		Student st=new Student();
-		st.setSId(sid);
-		TE.setStudent(st);
-		Classinfo cl=new Classinfo();
-		cl.setClassId(e_class);
-		TE.setClassinfo(cl);
+                Object obj=ServletActionContext.getRequest().getSession().getAttribute("Eclass");
+                e_class=obj.toString();      
+		
+                Student st=teachEvaluationServiceI.find_student(sid);
+    	        TE.setStudent(st);
+    	        Classinfo cl=teachEvaluationServiceI.find_classinfo(e_class);
+    	        TE.setClassinfo(cl);
 		TE.setA1(a1);
 		TE.setA2(a2);
 		TE.setA3(a3);

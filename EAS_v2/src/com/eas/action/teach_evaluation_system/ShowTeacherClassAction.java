@@ -1,6 +1,5 @@
-package com.eas.action.teach_evaluation_system;
+﻿package com.eas.action.teach_evaluation_system;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -36,12 +35,7 @@ public class ShowTeacherClassAction extends ActionSupport {
 		Teacher teacher=(Teacher) ActionContext.getContext().getSession().get("teacher");
 		List<Course> t=rFTeachEvaluationServiceI.findCourseby(teacher);
 		HttpServletResponse response=ServletActionContext.getResponse();
-		try {
-			response.getWriter().print(t);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ServletActionContext.getRequest().setAttribute("t", t);
 	return SUCCESS;
 	}
 }
