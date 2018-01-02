@@ -1,10 +1,11 @@
-﻿package com.eas.action.teach_evaluation_system;
+package com.eas.action.teach_evaluation_system;
 
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.annotation.Resource;
+
 
 
 import org.apache.struts2.ServletActionContext;
@@ -15,6 +16,7 @@ import org.apache.struts2.convention.annotation.Result;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+
 
 
 
@@ -98,21 +100,26 @@ public class TeachEvaluationAction extends ActionSupport {
     public String execute(){
 		ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("/applicationContext.xml");//加载Spring配置文件，初始化IOC容器
 		
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-		String str = format.format(new Date());
-		System.out.print(str);
+//		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+//		String str = format.format(new Date());
+//		System.out.print(str);
 
 		Teachingevaluation TE=new Teachingevaluation();
 
 		Student stu=(Student) ActionContext.getContext().getSession().get("student");
 		sid=stu.getSId();
-                Object obj=ServletActionContext.getRequest().getSession().getAttribute("Eclass");
-                e_class=obj.toString();      
+		System.out.println("sid:"+sid);
 		
-                Student st=teachEvaluationServiceI.find_student(sid);
-    	        TE.setStudent(st);
-    	        Classinfo cl=teachEvaluationServiceI.find_classinfo(e_class);
-    	        TE.setClassinfo(cl);
+        e_class=(String) ServletActionContext.getRequest().getSession().getAttribute("Eclass"); 
+        System.out.println("cid:"+e_class);
+
+        Student st=teachEvaluationServiceI.find_student(sid);
+        System.out.println("st"+st.getStuName());
+        TE.setStudent(st);
+        Classinfo cl=teachEvaluationServiceI.find_classinfo(e_class);
+        System.out.println("classinfo:"+cl.getStudentNumber());
+        TE.setClassinfo(cl); 
+        
 		TE.setA1(a1);
 		TE.setA2(a2);
 		TE.setA3(a3);
