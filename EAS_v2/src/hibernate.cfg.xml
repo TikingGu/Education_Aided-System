@@ -9,7 +9,7 @@
 			org.hibernate.dialect.MySQL57Dialect
 		</property>
 		<property name="hibernate.connection.url">
-			jdbc:mysql://localhost:3306/eas
+			jdbc:mysql://localhost:3306/eas36
 		</property>
 		<property name="hibernate.connection.driver_class">
 			com.mysql.jdbc.Driver
@@ -27,7 +27,7 @@
 		<!-- 3，导入映射文件 -->
 		<property name="myeclipse.connection.profile">eas</property>
 		<property name="connection.url">
-			jdbc:mysql://localhost:3306/eas
+			jdbc:mysql://localhost:3306/eas36
 		</property>
 		<property name="connection.username">root</property>
 		<property name="connection.password">root</property>
@@ -35,7 +35,7 @@
 			com.mysql.jdbc.Driver
 		</property>
 		<property name="dialect">
-			org.hibernate.dialect.MySQL57Dialect
+			org.hibernate.dialect.MySQLDialect
 		</property>
 		<mapping class="com.eas.model.Teacher" />
 		<mapping class="com.eas.model.Posting" />
@@ -52,7 +52,8 @@
 		<mapping class="com.eas.model.Replies" />
 		<mapping class="com.eas.model.Course" />
 		<mapping class="com.eas.model.Question" />
-		<mapping class="com.eas.model.rollcall_system.Rollcall" />
-		<mapping class="com.eas.model.homework_evaluation_system.HomeworkComment" />
+		<mapping class="com.eas.model.Rollcall" />
+		<mapping class="com.eas.model.HomeworkComment" />
+		<mapping class="com.eas.model.StuClass" />
 	</session-factory>
 </hibernate-configuration>
