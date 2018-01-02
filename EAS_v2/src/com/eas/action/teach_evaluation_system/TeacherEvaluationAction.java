@@ -129,7 +129,11 @@ public class TeacherEvaluationAction extends ActionSupport{
 		System.out.print(nt.format(A3));
 		System.out.print(nt.format(A4));*/
 		HttpServletResponse response=ServletActionContext.getResponse();
-		ServletActionContext.getRequest().setAttribute("p", p);
+		try {	
+			response.getWriter().print(p);		
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage());
+		}
 		return SUCCESS;
 }
 }

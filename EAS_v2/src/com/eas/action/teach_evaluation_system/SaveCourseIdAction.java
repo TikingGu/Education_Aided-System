@@ -22,7 +22,15 @@ import com.opensymphony.xwork2.ActionSupport;
 @ParentPackage("struts-default")
 public class SaveCourseIdAction extends ActionSupport{
 	private String courseId;
+	private String path;
 
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
 	public String getCourseId() {
 		return courseId;
 	}
@@ -36,7 +44,7 @@ public class SaveCourseIdAction extends ActionSupport{
 	@Action(value="SavaCourseIdAction"/*,results={
 	   		@Result(name="success",location="/TeachEvaluationSuccess.jsp")}*/)
 	public String execute(){
-		ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("/applicationContext.xml");//加载Spring配置文件，初始化IOC容器
+		ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("/applicationContext.xml");//鍔犺浇Spring閰嶇疆鏂囦欢锛屽垵濮嬪寲IOC瀹瑰櫒
 		
 		List<String> eclass=saveCourseIdServiceI.findClassIdby(courseId);
 		ServletActionContext.getRequest().getSession().setAttribute("Eclass", eclass.get(0));
@@ -44,13 +52,22 @@ public class SaveCourseIdAction extends ActionSupport{
 		return null;
 	}
 	@Action(value="toCourseById",results={
-	   		@Result(name="success",location="/course_inf_all.jsp")})
+	   		@Result(name="course",location="/course_inf_all.jsp"),
+	   		@Result(name="teacher",location="/teacher_coursde_display.jsp"),
+	   		@Result(name="success",location="/login.jsp")})
 	public String toCourseById(){
-		ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("/applicationContext.xml");//加载Spring配置文件，初始化IOC容器
+		ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("/applicationContext.xml");//鍔犺浇Spring閰嶇疆鏂囦欢锛屽垵濮嬪寲IOC瀹瑰櫒
 		System.out.print(courseId);
 		List<String> eclass=saveCourseIdServiceI.findClassIdby(courseId);
 		ServletActionContext.getRequest().getSession().setAttribute("Eclass", eclass.get(0));
-		System.out.print(eclass);
+		System.out.println("eclass"+eclass);
+		if(path.equals("course")) {
+			return "course";
+		}else if(path.equals("teacher")) {
+			return "teacher";
+		}else {
 		return "success";
+		}
 	}
 }
+
