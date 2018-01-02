@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : EAS
+Source Server         : test
 Source Server Version : 50717
 Source Host           : localhost:3306
-Source Database       : eas
+Source Database       : eas36
 
 Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-01-02 11:27:21
+Date: 2018-01-02 13:00:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -190,7 +190,6 @@ CREATE TABLE `rollcall` (
   `C_IDS` varchar(255) NOT NULL,
   `code` varchar(255) DEFAULT NULL,
   `State` int(11) DEFAULT NULL,
-  `Times` int(11) DEFAULT '1',
   PRIMARY KEY (`C_IDS`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -224,9 +223,10 @@ INSERT INTO `sheet` VALUES ('2', 'S915102', 'BB', '40', '1');
 -- ----------------------------
 DROP TABLE IF EXISTS `sign`;
 CREATE TABLE `sign` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `sid` varchar(30) NOT NULL COMMENT '瀛︾敓ID',
   `classid` varchar(30) NOT NULL COMMENT '鍒拌?鐝?骇ID',
-  `Sign_Date` varchar(255) NOT NULL COMMENT '绛惧埌鏃ユ湡'
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -257,17 +257,19 @@ INSERT INTO `student` VALUES ('s915103', '123', 'leo');
 -- ----------------------------
 DROP TABLE IF EXISTS `stu_class`;
 CREATE TABLE `stu_class` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `Classid` varchar(30) DEFAULT NULL COMMENT '班级ID',
-  `Sid` varchar(30) DEFAULT NULL COMMENT '学生ID'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `Sid` varchar(30) DEFAULT NULL COMMENT '学生ID',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of stu_class
 -- ----------------------------
-INSERT INTO `stu_class` VALUES ('03', 's123');
-INSERT INTO `stu_class` VALUES ('class1', 's915101');
-INSERT INTO `stu_class` VALUES ('class1', 's915102');
-INSERT INTO `stu_class` VALUES ('class1', 's915103');
+INSERT INTO `stu_class` VALUES ('1', '03', 's123');
+INSERT INTO `stu_class` VALUES ('2', 'class1', 's915101');
+INSERT INTO `stu_class` VALUES ('3', 'class1', 's915102');
+INSERT INTO `stu_class` VALUES ('4', 'class1', 's915103');
 
 -- ----------------------------
 -- Table structure for teacher
