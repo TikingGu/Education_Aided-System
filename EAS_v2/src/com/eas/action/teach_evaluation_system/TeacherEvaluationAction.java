@@ -41,6 +41,7 @@ public class TeacherEvaluationAction extends ActionSupport{
 	public String execute(){
 		ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("/applicationContext.xml");//加载Spring配置文件，初始化IOC容器
 		//获取问题1的总成绩
+                e_class="class1";
 		List<String> s1=teacherEvaluationServiceI.findA1by(e_class);
 		int count11=0,count12=0,count13=0,count14=0;
 		for(int i=0;i<s1.size();i++){
@@ -129,11 +130,8 @@ public class TeacherEvaluationAction extends ActionSupport{
 		System.out.print(nt.format(A3));
 		System.out.print(nt.format(A4));*/
 		HttpServletResponse response=ServletActionContext.getResponse();
-		try {	
-			response.getWriter().print(p);		
-		} catch (IOException e) {
-			throw new RuntimeException(e.getMessage());
-		}
+                ServletActionContext.getRequest().setAttribute("p", p);
+		
 		return SUCCESS;
 }
 }
