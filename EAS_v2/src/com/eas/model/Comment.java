@@ -1,10 +1,14 @@
 package com.eas.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,6 +27,7 @@ public class Comment implements java.io.Serializable {
 	private Student student;
 	private String title;
 	private String content;
+	private Date comment_date;
 
 	// Constructors
 
@@ -80,6 +85,14 @@ public class Comment implements java.io.Serializable {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+	
+	@Column(name="comment_date")
+	public Date getComment_date(){
+		return comment_date;
+	}
+	public void setComment_data(Date d){
+		this.comment_date=d;
 	}
 
 }

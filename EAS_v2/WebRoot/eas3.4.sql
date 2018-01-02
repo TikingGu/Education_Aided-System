@@ -66,6 +66,7 @@ CREATE TABLE `comment` (
   `Title` varchar(50) DEFAULT NULL COMMENT '鏍囬?',
   `Content` varchar(300) DEFAULT NULL COMMENT '鍐呭?',
   `sid` varchar(30) NOT NULL COMMENT '瀛︾敓ID',
+  `comment_date` timestamp DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Comment_ID`),
   KEY `co_sid` (`sid`),
   CONSTRAINT `co_sid` FOREIGN KEY (`sid`) REFERENCES `student` (`S_ID`)
