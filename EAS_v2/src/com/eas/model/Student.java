@@ -16,7 +16,7 @@ import javax.persistence.Table;
  * Student entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "student", catalog = "eas")
+@Table(name = "student", catalog = "eas36")
 public class Student implements java.io.Serializable {
 
 	// Fields
@@ -25,7 +25,6 @@ public class Student implements java.io.Serializable {
 	private String stuPassword;
 	private String stuName;
 	private Set<Comment> comments = new HashSet<Comment>(0);
-	private Set<Sign> signs = new HashSet<Sign>(0);
 	private Set<Posting> postings = new HashSet<Posting>(0);
 	private Set<Teachingevaluation> teachingevaluations = new HashSet<Teachingevaluation>(
 			0);
@@ -44,12 +43,10 @@ public class Student implements java.io.Serializable {
 
 	/** full constructor */
 	public Student(String stuPassword, String stuName, Set<Comment> comments,
-			Set<Sign> signs, Set<Posting> postings,
-			Set<Teachingevaluation> teachingevaluations) {
+			Set<Posting> postings, Set<Teachingevaluation> teachingevaluations) {
 		this.stuPassword = stuPassword;
 		this.stuName = stuName;
 		this.comments = comments;
-		this.signs = signs;
 		this.postings = postings;
 		this.teachingevaluations = teachingevaluations;
 	}
@@ -91,15 +88,6 @@ public class Student implements java.io.Serializable {
 
 	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "student")
-	public Set<Sign> getSigns() {
-		return this.signs;
-	}
-
-	public void setSigns(Set<Sign> signs) {
-		this.signs = signs;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "student")

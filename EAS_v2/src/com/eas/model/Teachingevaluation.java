@@ -14,12 +14,12 @@ import javax.persistence.Table;
  * Teachingevaluation entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "teachingevaluation", catalog = "eas")
+@Table(name = "teachingevaluation", catalog = "eas36")
 public class Teachingevaluation implements java.io.Serializable {
 
 	// Fields
 
-	private String EId;
+	private Integer EId;
 	private Classinfo classinfo;
 	private Student student;
 	private String a1;
@@ -55,12 +55,12 @@ public class Teachingevaluation implements java.io.Serializable {
 	// Property accessors
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "e_ID", unique = true, nullable = false, length = 30)
-	public String getEId() {
+	@Column(name = "e_ID", unique = true, nullable = false)
+	public Integer getEId() {
 		return this.EId;
 	}
 
-	public void setEId(String EId) {
+	public void setEId(Integer EId) {
 		this.EId = EId;
 	}
 

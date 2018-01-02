@@ -1,14 +1,11 @@
 package com.eas.model;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
 import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,7 +15,7 @@ import javax.persistence.Table;
  * Comment entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "comment", catalog = "eas")
+@Table(name = "comment", catalog = "eas36")
 public class Comment implements java.io.Serializable {
 
 	// Fields
@@ -27,7 +24,7 @@ public class Comment implements java.io.Serializable {
 	private Student student;
 	private String title;
 	private String content;
-	private Date comment_date;
+	private Date commentDate;
 
 	// Constructors
 
@@ -36,15 +33,18 @@ public class Comment implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Comment(Student student) {
+	public Comment(Student student, Date commentDate) {
 		this.student = student;
+		this.commentDate = commentDate;
 	}
 
 	/** full constructor */
-	public Comment(Student student, String title, String content) {
+	public Comment(Student student, String title, String content,
+			Date commentDate) {
 		this.student = student;
 		this.title = title;
 		this.content = content;
+		this.commentDate = commentDate;
 	}
 
 	// Property accessors
@@ -86,13 +86,14 @@ public class Comment implements java.io.Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
-	@Column(name="comment_date")
-	public Date getComment_date(){
-		return comment_date;
+
+	@Column(name = "comment_date", nullable = false, length = 19)
+	public Date getCommentDate() {
+		return this.commentDate;
 	}
-	public void setComment_data(Date d){
-		this.comment_date=d;
+
+	public void setCommentDate(Date commentDate) {
+		this.commentDate = commentDate;
 	}
 
 }

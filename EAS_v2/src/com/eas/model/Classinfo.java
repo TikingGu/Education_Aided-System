@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * Classinfo entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "classinfo", catalog = "eas")
+@Table(name = "classinfo", catalog = "eas36")
 public class Classinfo implements java.io.Serializable {
 
 	// Fields
@@ -27,9 +27,7 @@ public class Classinfo implements java.io.Serializable {
 	private Course course;
 	private Teacher teacher;
 	private Integer studentNumber;
-	private Set<Sign> signs = new HashSet<Sign>(0);
 	private Set<Test> tests = new HashSet<Test>(0);
-	private Set<Announcement> announcements = new HashSet<Announcement>(0);
 	private Set<Teachingevaluation> teachingevaluations = new HashSet<Teachingevaluation>(
 			0);
 
@@ -47,14 +45,11 @@ public class Classinfo implements java.io.Serializable {
 
 	/** full constructor */
 	public Classinfo(Course course, Teacher teacher, Integer studentNumber,
-			Set<Sign> signs, Set<Test> tests, Set<Announcement> announcements,
-			Set<Teachingevaluation> teachingevaluations) {
+			Set<Test> tests, Set<Teachingevaluation> teachingevaluations) {
 		this.course = course;
 		this.teacher = teacher;
 		this.studentNumber = studentNumber;
-		this.signs = signs;
 		this.tests = tests;
-		this.announcements = announcements;
 		this.teachingevaluations = teachingevaluations;
 	}
 
@@ -100,30 +95,12 @@ public class Classinfo implements java.io.Serializable {
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "classinfo")
-	public Set<Sign> getSigns() {
-		return this.signs;
-	}
-
-	public void setSigns(Set<Sign> signs) {
-		this.signs = signs;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "classinfo")
 	public Set<Test> getTests() {
 		return this.tests;
 	}
 
 	public void setTests(Set<Test> tests) {
 		this.tests = tests;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "classinfo")
-	public Set<Announcement> getAnnouncements() {
-		return this.announcements;
-	}
-
-	public void setAnnouncements(Set<Announcement> announcements) {
-		this.announcements = announcements;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "classinfo")

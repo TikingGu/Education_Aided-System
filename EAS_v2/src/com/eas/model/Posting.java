@@ -19,7 +19,7 @@ import javax.persistence.Table;
  * Posting entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "posting", catalog = "eas")
+@Table(name = "posting", catalog = "eas36")
 public class Posting implements java.io.Serializable {
 
 	// Fields
@@ -33,7 +33,6 @@ public class Posting implements java.io.Serializable {
 	private String content;
 	private String title;
 	private String classid;
-	
 	private Set<Replies> replieses = new HashSet<Replies>(0);
 
 	// Constructors
@@ -43,17 +42,19 @@ public class Posting implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Posting(Student student, Date poDate, String content, String title) {
+	public Posting(Student student, Date poDate, String content, String title,
+			String classid) {
 		this.student = student;
 		this.poDate = poDate;
 		this.content = content;
 		this.title = title;
+		this.classid = classid;
 	}
 
 	/** full constructor */
 	public Posting(Student student, Date poDate, Integer repliesNum,
 			Integer agreeNum, Integer disagreeNum, String content,
-			String title, Set<Replies> replieses) {
+			String title, String classid, Set<Replies> replieses) {
 		this.student = student;
 		this.poDate = poDate;
 		this.repliesNum = repliesNum;
@@ -61,6 +62,7 @@ public class Posting implements java.io.Serializable {
 		this.disagreeNum = disagreeNum;
 		this.content = content;
 		this.title = title;
+		this.classid = classid;
 		this.replieses = replieses;
 	}
 
@@ -76,7 +78,7 @@ public class Posting implements java.io.Serializable {
 		this.poId = poId;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Po_Student", nullable = false)
 	public Student getStudent() {
 		return this.student;
@@ -145,10 +147,10 @@ public class Posting implements java.io.Serializable {
 		return this.classid;
 	}
 
-	public void setClassid(String c) {
-		this.classid = c;
+	public void setClassid(String classid) {
+		this.classid = classid;
 	}
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "posting")
 	public Set<Replies> getReplieses() {
 		return this.replieses;

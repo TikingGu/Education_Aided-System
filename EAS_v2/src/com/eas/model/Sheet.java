@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * Sheet entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "sheet", catalog = "eas")
+@Table(name = "sheet", catalog = "eas36")
 public class Sheet implements java.io.Serializable {
 
 	// Fields

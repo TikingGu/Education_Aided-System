@@ -2,25 +2,21 @@ package com.eas.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
  * Announcement entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "announcement", catalog = "eas")
+@Table(name = "announcement", catalog = "eas36")
 public class Announcement implements java.io.Serializable {
 
 	// Fields
 
-	private Integer anId;
-	private Classinfo classinfo;
+	private String classid;
 	private String title;
 	private String content;
 
@@ -31,14 +27,12 @@ public class Announcement implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Announcement(Classinfo classinfo, String title) {
-		this.classinfo = classinfo;
+	public Announcement(String title) {
 		this.title = title;
 	}
 
 	/** full constructor */
-	public Announcement(Classinfo classinfo, String title, String content) {
-		this.classinfo = classinfo;
+	public Announcement(String title, String content) {
 		this.title = title;
 		this.content = content;
 	}
@@ -46,23 +40,13 @@ public class Announcement implements java.io.Serializable {
 	// Property accessors
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "An_ID", unique = true, nullable = false)
-	public Integer getAnId() {
-		return this.anId;
+	@Column(name = "classid", unique = true, nullable = false, length = 30)
+	public String getClassid() {
+		return this.classid;
 	}
 
-	public void setAnId(Integer anId) {
-		this.anId = anId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "classid", nullable = false)
-	public Classinfo getClassinfo() {
-		return this.classinfo;
-	}
-
-	public void setClassinfo(Classinfo classinfo) {
-		this.classinfo = classinfo;
+	public void setClassid(String classid) {
+		this.classid = classid;
 	}
 
 	@Column(name = "Title", nullable = false, length = 50)

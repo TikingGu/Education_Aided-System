@@ -19,7 +19,7 @@ import javax.persistence.Table;
  * Test entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "test", catalog = "eas")
+@Table(name = "test", catalog = "eas36")
 public class Test implements java.io.Serializable {
 
 	// Fields
@@ -27,8 +27,8 @@ public class Test implements java.io.Serializable {
 	private Integer testId;
 	private Classinfo classinfo;
 	private float totalPoints;
-	private Date testDate;
 	private String title;
+	private Date testDate;
 	private Set<Question> questions = new HashSet<Question>(0);
 	private Set<Sheet> sheets = new HashSet<Sheet>(0);
 
@@ -46,10 +46,11 @@ public class Test implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Test(Classinfo classinfo, float totalPoints, Date testDate,
-			Set<Question> questions, Set<Sheet> sheets) {
+	public Test(Classinfo classinfo, float totalPoints, String title,
+			Date testDate, Set<Question> questions, Set<Sheet> sheets) {
 		this.classinfo = classinfo;
 		this.totalPoints = totalPoints;
+		this.title = title;
 		this.testDate = testDate;
 		this.questions = questions;
 		this.sheets = sheets;
@@ -86,6 +87,15 @@ public class Test implements java.io.Serializable {
 		this.totalPoints = totalPoints;
 	}
 
+	@Column(name = "Title", length = 50)
+	public String getTitle() {
+		return this.title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	@Column(name = "Test_Date", nullable = false, length = 19)
 	public Date getTestDate() {
 		return this.testDate;
@@ -94,16 +104,7 @@ public class Test implements java.io.Serializable {
 	public void setTestDate(Date testDate) {
 		this.testDate = testDate;
 	}
-	
-	@Column(name = "Title", nullable = true, length = 50)
-	public String getTitle() {
-		return this.title;
-	}
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "test")
 	public Set<Question> getQuestions() {
 		return this.questions;

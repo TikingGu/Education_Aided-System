@@ -8,28 +8,28 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Sign entity. @author MyEclipse Persistence Tools
+ * StuClass entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "sign", catalog = "eas36")
-public class Sign implements java.io.Serializable {
+@Table(name = "stu_class", catalog = "eas36")
+public class StuClass implements java.io.Serializable {
 
 	// Fields
 
 	private Integer id;
-	private String sid;
 	private String classid;
+	private String sid;
 
 	// Constructors
 
 	/** default constructor */
-	public Sign() {
+	public StuClass() {
 	}
 
 	/** full constructor */
-	public Sign(String sid, String classid) {
-		this.sid = sid;
+	public StuClass(String classid, String sid) {
 		this.classid = classid;
+		this.sid = sid;
 	}
 
 	// Property accessors
@@ -44,22 +44,22 @@ public class Sign implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "sid", nullable = false, length = 30)
-	public String getSid() {
-		return this.sid;
-	}
-
-	public void setSid(String sid) {
-		this.sid = sid;
-	}
-
-	@Column(name = "classid", nullable = false, length = 30)
+	@Column(name = "Classid", length = 30)
 	public String getClassid() {
 		return this.classid;
 	}
 
 	public void setClassid(String classid) {
 		this.classid = classid;
+	}
+
+	@Column(name = "Sid", length = 30)
+	public String getSid() {
+		return this.sid;
+	}
+
+	public void setSid(String sid) {
+		this.sid = sid;
 	}
 
 }
