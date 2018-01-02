@@ -118,7 +118,7 @@ public class TeachEvaluationAction extends ActionSupport {
 		TE.setA3(a3);
 		TE.setA4(a4);
 		TE.setA5(a5);
-		TE.setEId(str);
+		
 		
 		teachEvaluationServiceI.add(TE);
 		
