@@ -1,4 +1,4 @@
-package com.eas.action.teach_evaluation_system;
+﻿package com.eas.action.teach_evaluation_system;
 
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class SaveCourseIdAction extends ActionSupport{
 		ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("/applicationContext.xml");//加载Spring配置文件，初始化IOC容器
 		
 		List<String> eclass=saveCourseIdServiceI.findClassIdby(courseId);
-		ServletActionContext.getRequest().getSession().setAttribute("Eclass", eclass);
+		ServletActionContext.getRequest().getSession().setAttribute("Eclass", eclass.get(0));
 		System.out.print(eclass);
 		return null;
 	}
