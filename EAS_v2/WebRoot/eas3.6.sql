@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : test
+Source Server         : EAS
 Source Server Version : 50717
 Source Host           : localhost:3306
-Source Database       : eas31
+Source Database       : eas
 
 Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-01-01 13:13:05
+Date: 2018-01-02 11:27:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,18 +20,16 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `announcement`;
 CREATE TABLE `announcement` (
-  `An_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '鍏?憡ID',
   `Title` varchar(50) NOT NULL COMMENT '鏍囬?',
   `Content` varchar(300) DEFAULT NULL COMMENT '鍐呭?',
   `classid` varchar(30) NOT NULL COMMENT '鐝?骇ID',
-  PRIMARY KEY (`An_ID`),
-  KEY `an_classid` (`classid`),
-  CONSTRAINT `an_classid` FOREIGN KEY (`classid`) REFERENCES `classinfo` (`Class_ID`)
+  PRIMARY KEY (`classid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of announcement
 -- ----------------------------
+INSERT INTO `announcement` VALUES ('aa', 'abcasd', '03');
 
 -- ----------------------------
 -- Table structure for classinfo
@@ -66,7 +64,7 @@ CREATE TABLE `comment` (
   `Title` varchar(50) DEFAULT NULL COMMENT '鏍囬?',
   `Content` varchar(300) DEFAULT NULL COMMENT '鍐呭?',
   `sid` varchar(30) NOT NULL COMMENT '瀛︾敓ID',
-  `comment_date` timestamp DEFAULT CURRENT_TIMESTAMP,
+  `comment_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`Comment_ID`),
   KEY `co_sid` (`sid`),
   CONSTRAINT `co_sid` FOREIGN KEY (`sid`) REFERENCES `student` (`S_ID`)
@@ -102,7 +100,7 @@ DROP TABLE IF EXISTS `homework_comment`;
 CREATE TABLE `homework_comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` varchar(255) DEFAULT NULL,
-  `created_at` datetime(6) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
   `S_ID` varchar(255) DEFAULT NULL,
   `T_ID` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
@@ -189,13 +187,11 @@ INSERT INTO `replies` VALUES ('2', '1', '2018-01-01 13:02:26', 's915103', 'ss');
 -- ----------------------------
 DROP TABLE IF EXISTS `rollcall`;
 CREATE TABLE `rollcall` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `C_IDS` varchar(255) DEFAULT NULL,
+  `C_IDS` varchar(255) NOT NULL,
   `code` varchar(255) DEFAULT NULL,
-  `created_at` datetime(6) DEFAULT NULL,
-  `expired_at` datetime(6) DEFAULT NULL,
-  `T_ID` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `State` int(11) DEFAULT NULL,
+  `Times` int(11) DEFAULT '1',
+  PRIMARY KEY (`C_IDS`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -229,13 +225,8 @@ INSERT INTO `sheet` VALUES ('2', 'S915102', 'BB', '40', '1');
 DROP TABLE IF EXISTS `sign`;
 CREATE TABLE `sign` (
   `sid` varchar(30) NOT NULL COMMENT '瀛︾敓ID',
-  `Sign_In` int(11) DEFAULT NULL COMMENT '鏄?惁绛惧埌',
   `classid` varchar(30) NOT NULL COMMENT '鍒拌?鐝?骇ID',
-  `Sign_Date` datetime NOT NULL COMMENT '绛惧埌鏃ユ湡',
-  PRIMARY KEY (`sid`,`classid`,`Sign_Date`),
-  KEY `class_id` (`classid`),
-  CONSTRAINT `class_id` FOREIGN KEY (`classid`) REFERENCES `classinfo` (`Class_ID`),
-  CONSTRAINT `s_id` FOREIGN KEY (`sid`) REFERENCES `student` (`S_ID`)
+  `Sign_Date` varchar(255) NOT NULL COMMENT '绛惧埌鏃ユ湡'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -262,6 +253,23 @@ INSERT INTO `student` VALUES ('s915102', '123', 'ban');
 INSERT INTO `student` VALUES ('s915103', '123', 'leo');
 
 -- ----------------------------
+-- Table structure for stu_class
+-- ----------------------------
+DROP TABLE IF EXISTS `stu_class`;
+CREATE TABLE `stu_class` (
+  `Classid` varchar(30) DEFAULT NULL COMMENT '班级ID',
+  `Sid` varchar(30) DEFAULT NULL COMMENT '学生ID'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of stu_class
+-- ----------------------------
+INSERT INTO `stu_class` VALUES ('03', 's123');
+INSERT INTO `stu_class` VALUES ('class1', 's915101');
+INSERT INTO `stu_class` VALUES ('class1', 's915102');
+INSERT INTO `stu_class` VALUES ('class1', 's915103');
+
+-- ----------------------------
 -- Table structure for teacher
 -- ----------------------------
 DROP TABLE IF EXISTS `teacher`;
@@ -285,7 +293,7 @@ INSERT INTO `teacher` VALUES ('t915102', 'jane', '123');
 -- ----------------------------
 DROP TABLE IF EXISTS `teachingevaluation`;
 CREATE TABLE `teachingevaluation` (
-  `e_ID` varchar(30) NOT NULL COMMENT '璇勬暀ID',
+  `e_ID` int(30) NOT NULL AUTO_INCREMENT COMMENT '璇勬暀ID',
   `e_Class` varchar(30) NOT NULL COMMENT '璇勬暀鐝?骇ID',
   `sid` varchar(30) NOT NULL COMMENT '瀛︾敓ID',
   `A1` varchar(1) DEFAULT NULL COMMENT '璇勬暀缁撴灉1',
@@ -298,7 +306,7 @@ CREATE TABLE `teachingevaluation` (
   KEY `e_s` (`sid`),
   CONSTRAINT `e_class` FOREIGN KEY (`e_Class`) REFERENCES `classinfo` (`Class_ID`),
   CONSTRAINT `e_s` FOREIGN KEY (`sid`) REFERENCES `student` (`S_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of teachingevaluation
