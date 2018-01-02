@@ -334,12 +334,12 @@ public class HibernateDAO {
 			destory();
 			}
 	}
-       /*根据sid查出classid*/
-	public List<String> findClassIdby(String sid){
+       /*根据courseid查出classid*/
+	public List<String> findClassIdby(String courseId){
 		try{
 			init();
-			String hql="select cf.classid from StuClass as sc where sc.sid=?";
-			List<String> c=session.createQuery(hql).setParameter(0,sid).list();
+			String hql="select cf.classId from Classinfo as cf where cf.course.courseId=?)";
+			List<String> c=session.createQuery(hql).setParameter(0,courseId).list();
 			return c;
 		}catch(Exception e){
 			e.printStackTrace();

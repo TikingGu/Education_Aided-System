@@ -16,13 +16,12 @@ import com.eas.model.Student;
 import com.eas.service.teach_evaluation_system.SaveCourseIdServiceI;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-
+ 
 @Controller
 @Namespace("/")
 @ParentPackage("struts-default")
 public class SaveCourseIdAction extends ActionSupport{
-	private String sid;
-     /* private String courseId;
+	private String courseId;
 
 	public String getCourseId() {
 		return courseId;
@@ -30,7 +29,7 @@ public class SaveCourseIdAction extends ActionSupport{
 
 	public void setCourseId(String courseId) {
 		this.courseId = courseId;
-	}*/
+	}
 	
 	@Resource(name="SaveCourseIdServiceI")
 	private SaveCourseIdServiceI saveCourseIdServiceI;
@@ -38,24 +37,20 @@ public class SaveCourseIdAction extends ActionSupport{
 	   		@Result(name="success",location="/TeachEvaluationSuccess.jsp")}*/)
 	public String execute(){
 		ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("/applicationContext.xml");//加载Spring配置文件，初始化IOC容器
-		Student stu=(Student) ActionContext.getContext().getSession().get("student");
-		sid=stu.getSId();
 		
-		List<String> eclass=saveCourseIdServiceI.findClassIdby(sid);
+		List<String> eclass=saveCourseIdServiceI.findClassIdby(courseId);
 		ServletActionContext.getRequest().getSession().setAttribute("Eclass", eclass);
-		/*System.out.print(eclass);*/
+		System.out.print(eclass);
 		return null;
 	}
 	@Action(value="toCourseById",results={
 	   		@Result(name="success",location="/course_inf_all.jsp")})
 	public String toCourseById(){
 		ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("/applicationContext.xml");//加载Spring配置文件，初始化IOC容器
-		Student stu=(Student) ActionContext.getContext().getSession().get("student");
-		sid=stu.getSId();
-		/*System.out.print(courseId);*/
-		List<String> eclass=saveCourseIdServiceI.findClassIdby(sid);
+		System.out.print(courseId);
+		List<String> eclass=saveCourseIdServiceI.findClassIdby(courseId);
 		ServletActionContext.getRequest().getSession().setAttribute("Eclass", eclass.get(0));
-		/*System.out.print(eclass);*/
+		System.out.print(eclass);
 		return "success";
 	}
 }

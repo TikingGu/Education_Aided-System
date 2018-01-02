@@ -12,7 +12,7 @@ import com.eas.dao.teach_evaluation_system.SaveCourseIdDAO;
 public class SaveCourseIdServiceImp implements SaveCourseIdServiceI{
      @Resource(name="SaveCourseIdDAO")
      private SaveCourseIdDAO saveCourseIdDAO;
-     public List<String> findClassIdby(String sid){
-    	 return saveCourseIdDAO.findClassIdby(sid);
+     public List<String> findClassIdby(String courseId){
+    	 return saveCourseIdDAO.findClassIdby(courseId);
      }
 }

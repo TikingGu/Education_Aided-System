@@ -8,7 +8,7 @@ import com.eas.util.HibernateDAO;
 
 @Repository("SaveCourseIdDAO")
 public class SaveCourseIdDAOImp extends HibernateDAO implements SaveCourseIdDAO {
-	public List<String> findClassIdby(String sid){
-		return super.findClassIdby(sid);
+	public List<String> findClassIdby(String courseId){
+		return super.findClassIdby(courseId);
 	}
 }
